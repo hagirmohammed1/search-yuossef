@@ -1248,125 +1248,21 @@
       const modalSubtitle = document.getElementById('modal-subtitle');
       const modalContent = document.getElementById('modal-content');
 
-      const safeEmoji = String(country.emoji || '🌍');
-      const safeName = String(country.name || 'دولة');
-      const safeCapital = String(country.capital || '-');
-      const safeContinent = String(country.continent || '-');
-      const safeArea = String(country.area || '-');
-      const safePopulation = String(country.population || '-');
-      const safeLanguage = String(country.language || '-');
-      const safeCurrency = String(country.currency || '-');
-      const safeGdp = String(country.gdp || '-');
-      const safeTimezone = String(country.timezone || '-');
-      const safeGovernment = String(country.government || '-');
+      // Safe property access with fallbacks
+      const countryName = String(country.name || 'دولة غير محددة');
+      const countryCode = String(country.code || country.emoji || '🌍');
+      const countryCapital = String(country.capital || 'غير محدد');
+      const countryContinent = String(country.continent || 'غير محدد');
+      const countryArea = String(country.area || 'غير محدد');
+      const countryPopulation = String(country.population || 'غير محدد');
+      const countryLanguage = String(country.language || 'غير محدد');
+      const countryCurrency = String(country.currency || 'غير محدد');
+      const countryGdp = String(country.gdp || 'غير محدد');
+      const countryTimezone = String(country.timezone || 'غير محدد');
+      const countryGovernment = String(country.government || 'غير محدد');
 
-      modalTitle.textContent = `${safeEmoji} ${safeName}`;
-      modalSubtitle.textContent = safeCapital;
-
-      modalContent.innerHTML = `
-        <table class="research-table">
-          <thead>
-            <tr>
-              <th>المعلومة</th>
-              <th>التفاصيل</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>🏛️ العاصمة</td>
-              <td>${safeCapital}</td>
-            </tr>
-            <tr>
-              <td>📍 القارة</td>
-              <td>${safeContinent}</td>
-            </tr>
-            <tr>
-              <td>📐 المساحة</td>
-              <td>${safeArea}</td>
-            </tr>
-            <tr>
-              <td>👥 عدد السكان</td>
-              <td>${safePopulation}</td>
-            </tr>
-            <tr>
-              <td>🗣️ اللغة الرسمية</td>
-              <td>${safeLanguage}</td>
-            </tr>
-            <tr>
-              <td>💱 العملة</td>
-              <td>${safeCurrency}</td>
-            </tr>
-            <tr>
-              <td>💹 الناتج المحلي الإجمالي</td>
-              <td>${safeGdp}</td>
-            </tr>
-            <tr>
-              <td>⏰ المنطقة الزمنية</td>
-              <td>${safeTimezone}</td>
-            </tr>
-            <tr>
-              <td>🏛️ نظام الحكم</td>
-              <td>${safeGovernment}</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <div style="background: #f0fdf4; padding: 16px; border-radius: 8px; border-right: 4px solid #059669; margin: 20px 0;">
-          <h4 style="color: #0f172a; margin-bottom: 12px; font-weight: 700; font-size: 16px;">📊 الملخص الجغرافي</h4>
-          <p style="color: #374151; font-size: 13px; line-height: 1.8; margin: 0;">
-            ${safeName} دولة تقع في قارة <strong>${safeContinent}</strong> وعاصمتها <strong>${safeCapital}</strong>. تبلغ مساحتها <strong>${safeArea}</strong> وعدد سكانها حوالي <strong>${safePopulation}</strong>. اللغة الرسمية هي <strong>${safeLanguage}</strong> والعملة المتداولة هي <strong>${safeCurrency}</strong>.
-          </p>
-        </div>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 20px 0;">
-          <div style="background: #eff6ff; padding: 16px; border-radius: 8px; border-left: 3px solid #3b82f6;">
-            <div style="font-size: 12px; font-weight: 700; color: #3b82f6; margin-bottom: 8px;">🏛️ المعلومات الإدارية</div>
-            <div style="display: grid; gap: 10px;">
-              <div><strong style="color: #1f2937;">العاصمة:</strong> ${safeCapital}</div>
-              <div><strong style="color: #1f2937;">نظام الحكم:</strong> ${safeGovernment}</div>
-              <div><strong style="color: #1f2937;">القارة:</strong> ${safeContinent}</div>
-            </div>
-          </div>
-
-          <div style="background: #fef3c7; padding: 16px; border-radius: 8px; border-left: 3px solid #f59e0b;">
-            <div style="font-size: 12px; font-weight: 700; color: #f59e0b; margin-bottom: 8px;">👥 المعلومات السكانية</div>
-            <div style="display: grid; gap: 10px;">
-              <div><strong style="color: #1f2937;">السكان:</strong> ${safePopulation}</div>
-              <div><strong style="color: #1f2937;">اللغة:</strong> ${safeLanguage}</div>
-              <div><strong style="color: #1f2937;">المساحة:</strong> ${safeArea}</div>
-            </div>
-          </div>
-
-          <div style="background: #dcfce7; padding: 16px; border-radius: 8px; border-left: 3px solid #10b981;">
-            <div style="font-size: 12px; font-weight: 700; color: #10b981; margin-bottom: 8px;">💰 المعلومات الاقتصادية</div>
-            <div style="display: grid; gap: 10px;">
-              <div><strong style="color: #1f2937;">العملة:</strong> ${safeCurrency}</div>
-              <div><strong style="color: #1f2937;">الناتج المحلي:</strong> ${safeGdp}</div>
-              <div><strong style="color: #1f2937;">المنطقة الزمنية:</strong> ${safeTimezone}</div>
-            </div>
-          </div>
-        </div>
-
-        <div style="background: #fef3c7; border-left: 4px solid #f59e0b; padding: 16px; border-radius: 8px; margin-top: 20px;">
-          <strong style="color: #b45309;">📚 ملاحظة جغرافية:</strong>
-          <p style="margin: 8px 0 0 0; font-size: 12px; color: #78350f; line-height: 1.6;">
-            البيانات الموضحة مستندة إلى أحدث الإحصائيات والمعلومات الجغرافية والاقتصادية المتاحة. تم تجميعها من مصادر دولية موثوقة ومحدثة بشكل مستمر.
-          </p>
-        </div>
-      `;
-
-      modal.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function showCountryDetails(country) {
-      const modal = document.getElementById('modal');
-      const modalTitle = document.getElementById('modal-title');
-      const modalSubtitle = document.getElementById('modal-subtitle');
-      const modalContent = document.getElementById('modal-content');
-
-      modalTitle.textContent = `${country.emoji} ${country.name}`;
-      modalSubtitle.textContent = country.capital;
+      modalTitle.textContent = `${countryCode} ${countryName}`;
+      modalSubtitle.textContent = countryCapital;
 
       modalContent.innerHTML = `
         <table class="research-table">
@@ -1379,39 +1275,39 @@
           <tbody>
             <tr>
               <td>🏛️ العاصمة</td>
-              <td>${country.capital}</td>
+              <td>${countryCapital}</td>
             </tr>
             <tr>
               <td>📍 القارة</td>
-              <td>${country.continent}</td>
+              <td>${countryContinent}</td>
             </tr>
             <tr>
               <td>📐 المساحة</td>
-              <td>${country.area}</td>
+              <td>${countryArea}</td>
             </tr>
             <tr>
               <td>👥 عدد السكان</td>
-              <td>${country.population}</td>
+              <td>${countryPopulation}</td>
             </tr>
             <tr>
               <td>🗣️ اللغة الرسمية</td>
-              <td>${country.language}</td>
+              <td>${countryLanguage}</td>
             </tr>
             <tr>
               <td>💱 العملة</td>
-              <td>${country.currency}</td>
+              <td>${countryCurrency}</td>
             </tr>
             <tr>
               <td>💹 الناتج المحلي الإجمالي</td>
-              <td>${country.gdp}</td>
+              <td>${countryGdp}</td>
             </tr>
             <tr>
               <td>⏰ المنطقة الزمنية</td>
-              <td>${country.timezone}</td>
+              <td>${countryTimezone}</td>
             </tr>
             <tr>
               <td>🏛️ نظام الحكم</td>
-              <td>${country.government}</td>
+              <td>${countryGovernment}</td>
             </tr>
           </tbody>
         </table>
@@ -1419,7 +1315,7 @@
         <div style="background: #f0fdf4; padding: 16px; border-radius: 8px; border-right: 4px solid #059669; margin: 20px 0;">
           <h4 style="color: #0f172a; margin-bottom: 12px; font-weight: 700; font-size: 16px;">📊 الملخص الجغرافي</h4>
           <p style="color: #374151; font-size: 13px; line-height: 1.8; margin: 0;">
-            ${country.name} دولة تقع في قارة <strong>${country.continent}</strong> وعاصمتها <strong>${country.capital}</strong>. تبلغ مساحتها <strong>${country.area}</strong> وعدد سكانها حوالي <strong>${country.population}</strong>. اللغة الرسمية هي <strong>${country.language}</strong> والعملة المتداولة هي <strong>${country.currency}</strong>. الناتج المحلي الإجمالي يبلغ <strong>${country.gdp}</strong> ونظام الحكم هو <strong>${country.government}</strong>.
+            ${countryName} دولة تقع في قارة <strong>${countryContinent}</strong> وعاصمتها <strong>${countryCapital}</strong>. تبلغ مساحتها <strong>${countryArea}</strong> وعدد سكانها حوالي <strong>${countryPopulation}</strong>. اللغة الرسمية هي <strong>${countryLanguage}</strong> والعملة المتداولة هي <strong>${countryCurrency}</strong>. الناتج المحلي الإجمالي يبلغ <strong>${countryGdp}</strong> ونظام الحكم هو <strong>${countryGovernment}</strong>.
           </p>
         </div>
 
@@ -1427,27 +1323,27 @@
           <div style="background: #eff6ff; padding: 16px; border-radius: 8px; border-left: 3px solid #3b82f6;">
             <div style="font-size: 12px; font-weight: 700; color: #3b82f6; margin-bottom: 8px;">🏛️ المعلومات الإدارية</div>
             <div style="display: grid; gap: 10px;">
-              <div><strong style="color: #1f2937;">العاصمة:</strong> ${country.capital}</div>
-              <div><strong style="color: #1f2937;">نظام الحكم:</strong> ${country.government}</div>
-              <div><strong style="color: #1f2937;">القارة:</strong> ${country.continent}</div>
+              <div><strong style="color: #1f2937;">العاصمة:</strong> ${countryCapital}</div>
+              <div><strong style="color: #1f2937;">نظام الحكم:</strong> ${countryGovernment}</div>
+              <div><strong style="color: #1f2937;">القارة:</strong> ${countryContinent}</div>
             </div>
           </div>
 
           <div style="background: #fef3c7; padding: 16px; border-radius: 8px; border-left: 3px solid #f59e0b;">
             <div style="font-size: 12px; font-weight: 700; color: #f59e0b; margin-bottom: 8px;">👥 المعلومات السكانية</div>
             <div style="display: grid; gap: 10px;">
-              <div><strong style="color: #1f2937;">السكان:</strong> ${country.population}</div>
-              <div><strong style="color: #1f2937;">اللغة:</strong> ${country.language}</div>
-              <div><strong style="color: #1f2937;">المساحة:</strong> ${country.area}</div>
+              <div><strong style="color: #1f2937;">السكان:</strong> ${countryPopulation}</div>
+              <div><strong style="color: #1f2937;">اللغة:</strong> ${countryLanguage}</div>
+              <div><strong style="color: #1f2937;">المساحة:</strong> ${countryArea}</div>
             </div>
           </div>
 
           <div style="background: #dcfce7; padding: 16px; border-radius: 8px; border-left: 3px solid #10b981;">
             <div style="font-size: 12px; font-weight: 700; color: #10b981; margin-bottom: 8px;">💰 المعلومات الاقتصادية</div>
             <div style="display: grid; gap: 10px;">
-              <div><strong style="color: #1f2937;">العملة:</strong> ${country.currency}</div>
-              <div><strong style="color: #1f2937;">الناتج المحلي:</strong> ${country.gdp}</div>
-              <div><strong style="color: #1f2937;">المنطقة الزمنية:</strong> ${country.timezone}</div>
+              <div><strong style="color: #1f2937;">العملة:</strong> ${countryCurrency}</div>
+              <div><strong style="color: #1f2937;">الناتج المحلي:</strong> ${countryGdp}</div>
+              <div><strong style="color: #1f2937;">المنطقة الزمنية:</strong> ${countryTimezone}</div>
             </div>
           </div>
         </div>
@@ -1458,7 +1354,7 @@
             <div>
               <h4 style="color: #6d28d9; font-size: 14px; font-weight: 700; margin: 0 0 12px 0;">معلومات عامة عن الدولة</h4>
               <p style="color: #374151; font-size: 13px; line-height: 1.8; margin: 0;">
-                تعتبر ${country.name} من دول <strong>${country.continent}</strong> ذات الأهمية الجيوسياسية والاقتصادية. تتمتع بموارد طبيعية متنوعة وتلعب دوراً مهماً في المنطقة. يشكل اقتصاد الدولة جزءاً هاماً من الاقتصاد العالمي بناتج محلي إجمالي يبلغ ${country.gdp}.
+                تعتبر ${countryName} من دول <strong>${countryContinent}</strong> ذات الأهمية الجيوسياسية والاقتصادية. تتمتع بموارد طبيعية متنوعة وتلعب دوراً مهماً في المنطقة. يشكل اقتصاد الدولة جزءاً هاماً من الاقتصاد العالمي بناتج محلي إجمالي يبلغ ${countryGdp}.
               </p>
             </div>
           </div>
@@ -1601,114 +1497,260 @@
     // Countries Data - All 195 Countries
     const countriesData = [
       // آسيا
-      { name: 'الصين', emoji: '🇨🇳', continent: 'آسيا', capital: 'بيجين', area: '9.6 مليون كم²', population: '1.4 مليار', language: 'المندرينية', currency: 'اليوان الصيني', gdp: '$17.7 تريليون', timezone: 'GMT+8', government: 'نظام حزب واحد' },
-      { name: 'الهند', emoji: '🇮🇳', continent: 'آسيا', capital: 'نيو دلهي', area: '3.3 مليون كم²', population: '1.4 مليار', language: 'الهندية', currency: 'روبية هندية', gdp: '$3.7 تريليون', timezone: 'GMT+5:30', government: 'جمهورية فيدرالية' },
-      { name: 'اليابان', emoji: '🇯🇵', continent: 'آسيا', capital: 'طوكيو', area: '377 ألف كم²', population: '125 مليون', language: 'اليابانية', currency: 'الين الياباني', gdp: '$4.2 تريليون', timezone: 'GMT+9', government: 'ملكية دستورية' },
-      { name: 'روسيا', emoji: '🇷🇺', continent: 'آسيا/أوروبا', capital: 'موسكو', area: '17.1 مليون كم²', population: '145 مليون', language: 'الروسية', currency: 'الروبل الروسي', gdp: '$1.8 تريليون', timezone: 'GMT+3 إلى GMT+12', government: 'جمهورية فيدرالية' },
-      { name: 'إندونيسيا', emoji: '🇮🇩', continent: 'آسيا', capital: 'جاكرتا', area: '1.9 مليون كم²', population: '275 مليون', language: 'الإندونيسية', currency: 'روبية إندونيسية', gdp: '$1.3 تريليون', timezone: 'GMT+7 إلى GMT+9', government: 'جمهورية' },
-      { name: 'باكستان', emoji: '🇵🇰', continent: 'آسيا', capital: 'إسلام آباد', area: '796 ألف كم²', population: '240 مليون', language: 'الأردية', currency: 'روبية باكستانية', gdp: '$477 مليار', timezone: 'GMT+5', government: 'جمهورية فيدرالية' },
-      { name: 'بنغلاديش', emoji: '🇧🇩', continent: 'آسيا', capital: 'داكا', area: '148 ألف كم²', population: '170 مليون', language: 'البنغالية', currency: 'تاكا بنغلاديشية', gdp: '$417 مليار', timezone: 'GMT+6', government: 'جمهورية' },
-      { name: 'فيتنام', emoji: '🇻🇳', continent: 'آسيا', capital: 'هانوي', area: '331 ألف كم²', population: '98 مليون', language: 'الفيتنامية', currency: 'دونغ فيتنامي', gdp: '$429 مليار', timezone: 'GMT+7', government: 'دولة اشتراكية' },
-      { name: 'تايلاند', emoji: '🇹🇭', continent: 'آسيا', capital: 'بانكوك', area: '513 ألف كم²', population: '72 مليون', language: 'التايلاندية', currency: 'بات تايلاندي', gdp: '$505 مليار', timezone: 'GMT+7', government: 'ملكية دستورية' },
-      { name: 'الفلبين', emoji: '🇵🇭', continent: 'آسيا', capital: 'مانيلا', area: '300 ألف كم²', population: '120 مليون', language: 'الفيليبينية', currency: 'بيزو فيليبيني', gdp: '$543 مليار', timezone: 'GMT+8', government: 'جمهورية' },
-      { name: 'ماليزيا', emoji: '🇲🇾', continent: 'آسيا', capital: 'كوالالمبور', area: '331 ألف كم²', population: '34 مليون', language: 'الماليزية', currency: 'رينجت ماليزي', gdp: '$534 مليار', timezone: 'GMT+8', government: 'ملكية فيدرالية' },
-      { name: 'سنغافورة', emoji: '🇸🇬', continent: 'آسيا', capital: 'سنغافورة', area: '728 كم²', population: '5.7 مليون', language: 'الإنجليزية والماليزية والمندرينية', currency: 'دولار سنغافوري', gdp: '$726 مليار', timezone: 'GMT+8', government: 'جمهورية برلمانية' },
-      { name: 'الكويت', emoji: '🇰🇼', continent: 'آسيا', capital: 'مدينة الكويت', area: '17.8 ألف كم²', population: '4.3 مليون', language: 'العربية', currency: 'دينار كويتي', gdp: '$182 مليار', timezone: 'GMT+3', government: 'إمارة دستورية' },
-      { name: 'الإمارات', emoji: '🇦🇪', continent: 'آسيا', capital: 'أبو ظبي', area: '83.6 ألف كم²', population: '9.9 مليون', language: 'العربية', currency: 'درهم إماراتي', gdp: '$527 مليار', timezone: 'GMT+4', government: 'إمارة فيدرالية' },
-      { name: 'السعودية', emoji: '🇸🇦', continent: 'آسيا', capital: 'الرياض', area: '2.1 مليون كم²', population: '36 مليون', language: 'العربية', currency: 'ريال سعودي', gdp: '$1.0 تريليون', timezone: 'GMT+3', government: 'ملكية مطلقة' },
-      { name: 'قطر', emoji: '🇶🇦', continent: 'آسيا', capital: 'الدوحة', area: '11.6 ألف كم²', population: '3.1 مليون', language: 'العربية', currency: 'ريال قطري', gdp: '$240 مليار', timezone: 'GMT+3', government: 'إمارة مطلقة' },
-      { name: 'العراق', emoji: '🇮🇶', continent: 'آسيا', capital: 'بغداد', area: '438 ألف كم²', population: '43 مليون', language: 'العربية', currency: 'دينار عراقي', gdp: '$264 مليار', timezone: 'GMT+3', government: 'جمهورية فيدرالية' },
-      { name: 'إيران', emoji: '🇮🇷', continent: 'آسيا', capital: 'طهران', area: '1.6 مليون كم²', population: '89 مليون', language: 'الفارسية', currency: 'ريال إيراني', gdp: '$1.9 تريليون', timezone: 'GMT+3:30', government: 'جمهورية إسلامية' },
-      { name: 'تركيا', emoji: '🇹🇷', continent: 'آسيا/أوروبا', capital: 'أنقرة', area: '783 ألف كم²', population: '86 مليون', language: 'التركية', currency: 'ليرة تركية', gdp: '$1.2 تريليون', timezone: 'GMT+3', government: 'جمهورية' },
-      { name: 'كوريا الجنوبية', emoji: '🇰🇷', continent: 'آسيا', capital: 'سيول', area: '100 ألف كم²', population: '52 مليون', language: 'الكورية', currency: 'وون كوري جنوبي', gdp: '$1.8 تريليون', timezone: 'GMT+9', government: 'جمهورية' },
-      { name: 'نيبال', emoji: '🇳🇵', continent: 'آسيا', capital: 'كاتماندو', area: '147 ألف كم²', population: '30 مليون', language: 'النيبالية', currency: 'روبية نيبالية', gdp: '$113 مليار', timezone: 'GMT+5:45', government: 'جمهورية فيدرالية' },
-      { name: 'سريلانكا', emoji: '🇱🇰', continent: 'آسيا', capital: 'كولومبو', area: '65.6 ألف كم²', population: '22 مليون', language: 'السنهالية والتاميلية', currency: 'روبية سيلانية', gdp: '$88 مليار', timezone: 'GMT+5:30', government: 'جمهورية' },
-      { name: 'أفغانستان', emoji: '🇦🇫', continent: 'آسيا', capital: 'كابول', area: '652 ألف كم²', population: '40 مليون', language: 'الداري والبشتو', currency: 'أفغاني', gdp: '$77 مليار', timezone: 'GMT+4:30', government: 'جمهورية إسلامية' },
-      { name: 'كازاخستان', emoji: '🇰🇿', continent: 'آسيا', capital: 'أستانة', area: '2.7 مليون كم²', population: '20 مليون', language: 'الكازاخستانية', currency: 'تنغ كازاخستاني', gdp: '$616 مليار', timezone: 'GMT+6', government: 'جمهورية رئاسية' },
+      { name: 'الصين', emoji: '🇨🇳', code: 'CN', continent: 'آسيا', capital: 'بيجين', area: '9.6 مليون كم²', population: '1.4 مليار', language: 'المندرينية', currency: 'اليوان الصيني', gdp: '$17.7 تريليون', timezone: 'GMT+8', government: 'نظام حزب واحد' },
+      { name: 'الهند', emoji: '🇮🇳', code: 'IN', continent: 'آسيا', capital: 'نيو دلهي', area: '3.3 مليون كم²', population: '1.4 مليار', language: 'الهندية', currency: 'روبية هندية', gdp: '$3.7 تريليون', timezone: 'GMT+5:30', government: 'جمهورية فيدرالية' },
+      { name: 'اليابان', emoji: '🇯🇵', code: 'JP', continent: 'آسيا', capital: 'طوكيو', area: '377 ألف كم²', population: '125 مليون', language: 'اليابانية', currency: 'الين الياباني', gdp: '$4.2 تريليون', timezone: 'GMT+9', government: 'ملكية دستورية' },
+      { name: 'روسيا', emoji: '🇷🇺', code: 'RU', continent: 'آسيا/أوروبا', capital: 'موسكو', area: '17.1 مليون كم²', population: '145 مليون', language: 'الروسية', currency: 'الروبل الروسي', gdp: '$1.8 تريليون', timezone: 'GMT+3 إلى GMT+12', government: 'جمهورية فيدرالية' },
+      { name: 'إندونيسيا', emoji: '🇮🇩', code: 'ID', continent: 'آسيا', capital: 'جاكرتا', area: '1.9 مليون كم²', population: '275 مليون', language: 'الإندونيسية', currency: 'روبية إندونيسية', gdp: '$1.3 تريليون', timezone: 'GMT+7 إلى GMT+9', government: 'جمهورية' },
+      { name: 'باكستان', emoji: '🇵🇰', code: 'PK', continent: 'آسيا', capital: 'إسلام آباد', area: '796 ألف كم²', population: '240 مليون', language: 'الأردية', currency: 'روبية باكستانية', gdp: '$477 مليار', timezone: 'GMT+5', government: 'جمهورية فيدرالية' },
+      { name: 'بنغلاديش', emoji: '🇧🇩', code: 'BD', continent: 'آسيا', capital: 'داكا', area: '148 ألف كم²', population: '170 مليون', language: 'البنغالية', currency: 'تاكا بنغلاديشية', gdp: '$417 مليار', timezone: 'GMT+6', government: 'جمهورية' },
+      { name: 'فيتنام', emoji: '🇻🇳', code: 'VN', continent: 'آسيا', capital: 'هانوي', area: '331 ألف كم²', population: '98 مليون', language: 'الفيتنامية', currency: 'دونغ فيتنامي', gdp: '$429 مليار', timezone: 'GMT+7', government: 'دولة اشتراكية' },
+      { name: 'تايلاند', emoji: '🇹🇭', code: 'TH', continent: 'آسيا', capital: 'بانكوك', area: '513 ألف كم²', population: '72 مليون', language: 'التايلاندية', currency: 'بات تايلاندي', gdp: '$505 مليار', timezone: 'GMT+7', government: 'ملكية دستورية' },
+      { name: 'الفلبين', emoji: '🇵🇭', code: 'PH', continent: 'آسيا', capital: 'مانيلا', area: '300 ألف كم²', population: '120 مليون', language: 'الفيليبينية', currency: 'بيزو فيليبيني', gdp: '$543 مليار', timezone: 'GMT+8', government: 'جمهورية' },
+      { name: 'ماليزيا', emoji: '🇲🇾', code: 'MY', continent: 'آسيا', capital: 'كوالالمبور', area: '331 ألف كم²', population: '34 مليون', language: 'الماليزية', currency: 'رينجت ماليزي', gdp: '$534 مليار', timezone: 'GMT+8', government: 'ملكية فيدرالية' },
+      { name: 'سنغافورة', emoji: '🇸🇬', code: 'SG', continent: 'آسيا', capital: 'سنغافورة', area: '728 كم²', population: '5.7 مليون', language: 'الإنجليزية والماليزية والمندرينية', currency: 'دولار سنغافوري', gdp: '$726 مليار', timezone: 'GMT+8', government: 'جمهورية برلمانية' },
+      { name: 'الكويت', emoji: '🇰🇼', code: 'KW', continent: 'آسيا', capital: 'مدينة الكويت', area: '17.8 ألف كم²', population: '4.3 مليون', language: 'العربية', currency: 'دينار كويتي', gdp: '$182 مليار', timezone: 'GMT+3', government: 'إمارة دستورية' },
+      { name: 'الإمارات', emoji: '🇦🇪', code: 'AE', continent: 'آسيا', capital: 'أبو ظبي', area: '83.6 ألف كم²', population: '9.9 مليون', language: 'العربية', currency: 'درهم إماراتي', gdp: '$527 مليار', timezone: 'GMT+4', government: 'إمارة فيدرالية' },
+      { name: 'السعودية', emoji: '🇸🇦', code: 'SA', continent: 'آسيا', capital: 'الرياض', area: '2.1 مليون كم²', population: '36 مليون', language: 'العربية', currency: 'ريال سعودي', gdp: '$1.0 تريليون', timezone: 'GMT+3', government: 'ملكية مطلقة' },
+      { name: 'قطر', emoji: '🇶🇦', code: 'QA', continent: 'آسيا', capital: 'الدوحة', area: '11.6 ألف كم²', population: '3.1 مليون', language: 'العربية', currency: 'ريال قطري', gdp: '$240 مليار', timezone: 'GMT+3', government: 'إمارة مطلقة' },
+      { name: 'العراق', emoji: '🇮🇶', code: 'IQ', continent: 'آسيا', capital: 'بغداد', area: '438 ألف كم²', population: '43 مليون', language: 'العربية', currency: 'دينار عراقي', gdp: '$264 مليار', timezone: 'GMT+3', government: 'جمهورية فيدرالية' },
+      { name: 'إيران', emoji: '🇮🇷', code: 'IR', continent: 'آسيا', capital: 'طهران', area: '1.6 مليون كم²', population: '89 مليون', language: 'الفارسية', currency: 'ريال إيراني', gdp: '$1.9 تريليون', timezone: 'GMT+3:30', government: 'جمهورية إسلامية' },
+      { name: 'تركيا', emoji: '🇹🇷', code: 'TR', continent: 'آسيا/أوروبا', capital: 'أنقرة', area: '783 ألف كم²', population: '86 مليون', language: 'التركية', currency: 'ليرة تركية', gdp: '$1.2 تريليون', timezone: 'GMT+3', government: 'جمهورية' },
+      { name: 'كوريا الجنوبية', emoji: '🇰🇷', code: 'KR', continent: 'آسيا', capital: 'سيول', area: '100 ألف كم²', population: '52 مليون', language: 'الكورية', currency: 'وون كوري جنوبي', gdp: '$1.8 تريليون', timezone: 'GMT+9', government: 'جمهورية' },
+      { name: 'نيبال', emoji: '🇳🇵', code: 'NP', continent: 'آسيا', capital: 'كاتماندو', area: '147 ألف كم²', population: '30 مليون', language: 'النيبالية', currency: 'روبية نيبالية', gdp: '$113 مليار', timezone: 'GMT+5:45', government: 'جمهورية فيدرالية' },
+      { name: 'سريلانكا', emoji: '🇱🇰', code: 'LK', continent: 'آسيا', capital: 'كولومبو', area: '65.6 ألف كم²', population: '22 مليون', language: 'السنهالية والتاميلية', currency: 'روبية سيلانية', gdp: '$88 مليار', timezone: 'GMT+5:30', government: 'جمهورية' },
+      { name: 'أفغانستان', emoji: '🇦🇫', code: 'AF', continent: 'آسيا', capital: 'كابول', area: '652 ألف كم²', population: '40 مليون', language: 'الداري والبشتو', currency: 'أفغاني', gdp: '$77 مليار', timezone: 'GMT+4:30', government: 'جمهورية إسلامية' },
+      { name: 'كازاخستان', emoji: '🇰🇿', code: 'KZ', continent: 'آسيا', capital: 'أستانة', area: '2.7 مليون كم²', population: '20 مليون', language: 'الكازاخستانية', currency: 'تنغ كازاخستاني', gdp: '$616 مليار', timezone: 'GMT+6', government: 'جمهورية رئاسية' },
 
       // أفريقيا
-      { name: 'مصر', emoji: '🇪🇬', continent: 'إفريقيا', capital: 'القاهرة', area: '1.0 مليون كم²', population: '105 مليون', language: 'العربية', currency: 'جنيه مصري', gdp: '$476 مليار', timezone: 'GMT+2', government: 'جمهورية' },
-      { name: 'نيجيريا', emoji: '🇳🇬', continent: 'إفريقيا', capital: 'أبوجا', area: '924 ألف كم²', population: '223 مليون', language: 'الإنجليزية والهاوسا', currency: 'نايرا نيجيري', gdp: '$544 مليار', timezone: 'GMT+1', government: 'جمهورية فيدرالية' },
-      { name: 'إثيوبيا', emoji: '🇪🇹', continent: 'إفريقيا', capital: 'أديس أبابا', area: '1.1 مليون كم²', population: '120 مليون', language: 'الأمهرية', currency: 'بر إثيوبي', gdp: '$265 مليار', timezone: 'GMT+3', government: 'جمهورية فيدرالية' },
-      { name: 'جنوب إفريقيا', emoji: '🇿🇦', continent: 'إفريقيا', capital: 'بريتوريا وكيب تاون', area: '1.2 مليون كم²', population: '60 مليون', language: 'الإنجليزية والزولو', currency: 'راند جنوب أفريقي', gdp: '$406 مليار', timezone: 'GMT+2', government: 'جمهورية برلمانية' },
-      { name: 'الجزائر', emoji: '🇩🇿', continent: 'إفريقيا', capital: 'الجزائر', area: '2.4 مليون كم²', population: '45 مليون', language: 'العربية والبربرية', currency: 'دينار جزائري', gdp: '$251 مليار', timezone: 'GMT+1', government: 'جمهورية' },
-      { name: 'كينيا', emoji: '🇰🇪', continent: 'إفريقيا', capital: 'نيروبي', area: '580 ألف كم²', population: '54 مليون', language: 'السواحيلية والإنجليزية', currency: 'شلن كيني', gdp: '$119 مليار', timezone: 'GMT+3', government: 'جمهورية' },
-      { name: 'تنزانيا', emoji: '🇹🇿', continent: 'إفريقيا', capital: 'دار السلام', area: '945 ألف كم²', population: '65 مليون', language: 'السواحيلية', currency: 'شلن تنزاني', gdp: '$150 مليار', timezone: 'GMT+3', government: 'جمهورية اتحادية' },
-      { name: 'غانا', emoji: '🇬🇭', continent: 'إفريقيا', capital: 'أكرا', area: '239 ألف كم²', population: '34 مليون', language: 'الإنجليزية', currency: 'سيدي غاني', gdp: '$78 مليار', timezone: 'GMT+0', government: 'جمهورية' },
-      { name: 'المغرب', emoji: '🇲🇦', continent: 'إفريقيا', capital: 'الرباط', area: '447 ألف كم²', population: '37 مليون', language: 'العربية والفرنسية', currency: 'درهم مغربي', gdp: '$135 مليار', timezone: 'GMT+0', government: 'ملكية دستورية' },
-      { name: 'تونس', emoji: '🇹🇳', continent: 'إفريقيا', capital: 'تونس', area: '164 ألف كم²', population: '12 مليون', language: 'العربية والفرنسية', currency: 'دينار تونسي', gdp: '$73 مليار', timezone: 'GMT+1', government: 'جمهورية' },
-      { name: 'ليبيا', emoji: '🇱🇾', continent: 'إفريقيا', capital: 'طرابلس', area: '1.8 مليون كم²', population: '7 مليون', language: 'العربية', currency: 'دينار ليبي', gdp: '$47 مليار', timezone: 'GMT+1', government: 'جمهورية' },
-      { name: 'أوغندا', emoji: '🇺🇬', continent: 'إفريقيا', capital: 'كمبالا', area: '241 ألف كم²', population: '48 مليون', language: 'الإنجليزية', currency: 'شلن أوغندي', gdp: '$42 مليار', timezone: 'GMT+3', government: 'جمهورية' },
-      { name: 'رواندا', emoji: '🇷🇼', continent: 'إفريقيا', capital: 'كيجالي', area: '26.3 ألف كم²', population: '14 مليون', language: 'الكينياروندا والإنجليزية', currency: 'فرنك رواندي', gdp: '$37 مليار', timezone: 'GMT+2', government: 'جمهورية' },
-      { name: 'الكاميرون', emoji: '🇨🇲', continent: 'إفريقيا', capital: 'ياوندي', area: '475 ألف كم²', population: '28 مليون', language: 'الفرنسية والإنجليزية', currency: 'فرنك إفريقي وسطي', gdp: '$48 مليار', timezone: 'GMT+1', government: 'جمهورية' },
-      { name: 'السنغال', emoji: '🇸🇳', continent: 'إفريقيا', capital: 'داكار', area: '197 ألف كم²', population: '18 مليون', language: 'الفرنسية والوولوف', currency: 'فرنك إفريقي', gdp: '$30 مليار', timezone: 'GMT+0', government: 'جمهورية' },
-      { name: 'موزمبيق', emoji: '🇲🇿', continent: 'إفريقيا', capital: 'مابوتو', area: '801 ألف كم²', population: '34 مليون', language: 'البرتغالية', currency: 'ميتيكال', gdp: '$42 مليار', timezone: 'GMT+2', government: 'جمهورية' },
-      { name: 'أنغولا', emoji: '🇦🇴', continent: 'إفريقيا', capital: 'لواندا', area: '1.2 مليون كم²', population: '36 مليون', language: 'البرتغالية', currency: 'كوانزا أنغولي', gdp: '$95 مليار', timezone: 'GMT+1', government: 'جمهورية' },
+      { name: 'مصر', emoji: '🇪🇬', code: 'EG', continent: 'إفريقيا', capital: 'القاهرة', area: '1.0 مليون كم²', population: '105 مليون', language: 'العربية', currency: 'جنيه مصري', gdp: '$476 مليار', timezone: 'GMT+2', government: 'جمهورية' },
+      { name: 'نيجيريا', emoji: '🇳🇬', code: 'NG', continent: 'إفريقيا', capital: 'أبوجا', area: '924 ألف كم²', population: '223 مليون', language: 'الإنجليزية والهاوسا', currency: 'نايرا نيجيري', gdp: '$544 مليار', timezone: 'GMT+1', government: 'جمهورية فيدرالية' },
+      { name: 'إثيوبيا', emoji: '🇪🇹', code: 'ET', continent: 'إفريقيا', capital: 'أديس أبابا', area: '1.1 مليون كم²', population: '120 مليون', language: 'الأمهرية', currency: 'بر إثيوبي', gdp: '$265 مليار', timezone: 'GMT+3', government: 'جمهورية فيدرالية' },
+      { name: 'جنوب إفريقيا', emoji: '🇿🇦', code: 'ZA', continent: 'إفريقيا', capital: 'بريتوريا وكيب تاون', area: '1.2 مليون كم²', population: '60 مليون', language: 'الإنجليزية والزولو', currency: 'راند جنوب أفريقي', gdp: '$406 مليار', timezone: 'GMT+2', government: 'جمهورية برلمانية' },
+      { name: 'الجزائر', emoji: '🇩🇿', code: 'DZ', continent: 'إفريقيا', capital: 'الجزائر', area: '2.4 مليون كم²', population: '45 مليون', language: 'العربية والبربرية', currency: 'دينار جزائري', gdp: '$251 مليار', timezone: 'GMT+1', government: 'جمهورية' },
+      { name: 'كينيا', emoji: '🇰🇪', code: 'KE', continent: 'إفريقيا', capital: 'نيروبي', area: '580 ألف كم²', population: '54 مليون', language: 'السواحيلية والإنجليزية', currency: 'شلن كيني', gdp: '$119 مليار', timezone: 'GMT+3', government: 'جمهورية' },
+      { name: 'تنزانيا', emoji: '🇹🇿', code: 'TZ', continent: 'إفريقيا', capital: 'دار السلام', area: '945 ألف كم²', population: '65 مليون', language: 'السواحيلية', currency: 'شلن تنزاني', gdp: '$150 مليار', timezone: 'GMT+3', government: 'جمهورية اتحادية' },
+      { name: 'غانا', emoji: '🇬🇭', code: 'GH', continent: 'إفريقيا', capital: 'أكرا', area: '239 ألف كم²', population: '34 مليون', language: 'الإنجليزية', currency: 'سيدي غاني', gdp: '$78 مليار', timezone: 'GMT+0', government: 'جمهورية' },
+      { name: 'المغرب', emoji: '🇲🇦', code: 'MA', continent: 'إفريقيا', capital: 'الرباط', area: '447 ألف كم²', population: '37 مليون', language: 'العربية والفرنسية', currency: 'درهم مغربي', gdp: '$135 مليار', timezone: 'GMT+0', government: 'ملكية دستورية' },
+      { name: 'تونس', emoji: '🇹🇳', code: 'TN', continent: 'إفريقيا', capital: 'تونس', area: '164 ألف كم²', population: '12 مليون', language: 'العربية والفرنسية', currency: 'دينار تونسي', gdp: '$73 مليار', timezone: 'GMT+1', government: 'جمهورية' },
+      { name: 'ليبيا', emoji: '🇱🇾', code: 'LY', continent: 'إفريقيا', capital: 'طرابلس', area: '1.8 مليون كم²', population: '7 مليون', language: 'العربية', currency: 'دينار ليبي', gdp: '$47 مليار', timezone: 'GMT+1', government: 'جمهورية' },
+      { name: 'أوغندا', emoji: '🇺🇬', code: 'UG', continent: 'إفريقيا', capital: 'كمبالا', area: '241 ألف كم²', population: '48 مليون', language: 'الإنجليزية', currency: 'شلن أوغندي', gdp: '$42 مليار', timezone: 'GMT+3', government: 'جمهورية' },
+      { name: 'رواندا', emoji: '🇷🇼', code: 'RW', continent: 'إفريقيا', capital: 'كيجالي', area: '26.3 ألف كم²', population: '14 مليون', language: 'الكينياروندا والإنجليزية', currency: 'فرنك رواندي', gdp: '$37 مليار', timezone: 'GMT+2', government: 'جمهورية' },
+      { name: 'الكاميرون', emoji: '🇨🇲', code: 'CM', continent: 'إفريقيا', capital: 'ياوندي', area: '475 ألف كم²', population: '28 مليون', language: 'الفرنسية والإنجليزية', currency: 'فرنك إفريقي وسطي', gdp: '$48 مليار', timezone: 'GMT+1', government: 'جمهورية' },
+      { name: 'السنغال', emoji: '🇸🇳', code: 'SN', continent: 'إفريقيا', capital: 'داكار', area: '197 ألف كم²', population: '18 مليون', language: 'الفرنسية والوولوف', currency: 'فرنك إفريقي', gdp: '$30 مليار', timezone: 'GMT+0', government: 'جمهورية' },
+      { name: 'موزمبيق', emoji: '🇲🇿', code: 'MZ', continent: 'إفريقيا', capital: 'مابوتو', area: '801 ألف كم²', population: '34 مليون', language: 'البرتغالية', currency: 'ميتيكال', gdp: '$42 مليار', timezone: 'GMT+2', government: 'جمهورية' },
+      { name: 'أنغولا', emoji: '🇦🇴', code: 'AO', continent: 'إفريقيا', capital: 'لواندا', area: '1.2 مليون كم²', population: '36 مليون', language: 'البرتغالية', currency: 'كوانزا أنغولي', gdp: '$95 مليار', timezone: 'GMT+1', government: 'جمهورية' },
 
       // أوروبا
-      { name: 'ألمانيا', emoji: '🇩🇪', continent: 'أوروبا', capital: 'برلين', area: '357 ألف كم²', population: '84 مليون', language: 'الألمانية', currency: 'يورو', gdp: '$4.5 تريليون', timezone: 'GMT+1', government: 'جمهورية فيدرالية' },
-      { name: 'فرنسا', emoji: '🇫🇷', continent: 'أوروبا', capital: 'باريس', area: '643 ألف كم²', population: '68 مليون', language: 'الفرنسية', currency: 'يورو', gdp: '$3.0 تريليون', timezone: 'GMT+1', government: 'جمهورية نصف رئاسية' },
-      { name: 'إيطاليا', emoji: '🇮🇹', continent: 'أوروبا', capital: 'روما', area: '301 ألف كم²', population: '57 مليون', language: 'الإيطالية', currency: 'يورو', gdp: '$2.2 تريليون', timezone: 'GMT+1', government: 'جمهورية برلمانية' },
-      { name: 'إسبانيا', emoji: '🇪🇸', continent: 'أوروبا', capital: 'مدريد', area: '506 ألف كم²', population: '48 مليون', language: 'الإسبانية', currency: 'يورو', gdp: '$1.5 تريليون', timezone: 'GMT+1', government: 'ملكية دستورية' },
-      { name: 'بولندا', emoji: '🇵🇱', continent: 'أوروبا', capital: 'وارسو', area: '312 ألف كم²', population: '37 مليون', language: 'البولندية', currency: 'زلوتي بولندي', gdp: '$889 مليار', timezone: 'GMT+1', government: 'جمهورية برلمانية' },
-      { name: 'المملكة المتحدة', emoji: '🇬🇧', continent: 'أوروبا', capital: 'لندن', area: '243 ألف كم²', population: '68 مليون', language: 'الإنجليزية', currency: 'جنيه استرليني', gdp: '$3.3 تريليون', timezone: 'GMT+0', government: 'ملكية برلمانية' },
-      { name: 'هولندا', emoji: '🇳🇱', continent: 'أوروبا', capital: 'أمستردام', area: '41.5 ألف كم²', population: '18 مليون', language: 'الهولندية', currency: 'يورو', gdp: '$1.3 تريليون', timezone: 'GMT+1', government: 'ملكية برلمانية' },
-      { name: 'بلجيكا', emoji: '🇧🇪', continent: 'أوروبا', capital: 'بروكسل', area: '30.5 ألف كم²', population: '11.6 مليون', language: 'الهولندية والفرنسية', currency: 'يورو', gdp: '$743 مليار', timezone: 'GMT+1', government: 'ملكية فيدرالية' },
-      { name: 'اليونان', emoji: '🇬🇷', continent: 'أوروبا', capital: 'أثينا', area: '132 ألف كم²', population: '10.7 مليون', language: 'اليونانية', currency: 'يورو', gdp: '$242 مليار', timezone: 'GMT+2', government: 'جمهورية برلمانية' },
-      { name: 'البرتغال', emoji: '🇵🇹', continent: 'أوروبا', capital: 'لشبونة', area: '92 ألف كم²', population: '10.4 مليون', language: 'البرتغالية', currency: 'يورو', gdp: '$297 مليار', timezone: 'GMT+0', government: 'جمهورية برلمانية' },
-      { name: 'السويد', emoji: '🇸🇪', continent: 'أوروبا', capital: 'ستوكهولم', area: '450 ألف كم²', population: '10.5 مليون', language: 'السويدية', currency: 'كرونة سويدية', gdp: '$617 مليار', timezone: 'GMT+1', government: 'ملكية برلمانية' },
-      { name: 'النرويج', emoji: '🇳🇴', continent: 'أوروبا', capital: 'أوسلو', area: '385 ألف كم²', population: '5.5 مليون', language: 'النرويجية', currency: 'كرونة نرويجية', gdp: '$570 مليار', timezone: 'GMT+1', government: 'ملكية برلمانية' },
-      { name: 'فنلندا', emoji: '🇫🇮', continent: 'أوروبا', capital: 'هلسنكي', area: '338 ألف كم²', population: '5.6 مليون', language: 'الفنلندية', currency: 'يورو', gdp: '$382 مليار', timezone: 'GMT+2', government: 'جمهورية برلمانية' },
-      { name: 'الدنمارك', emoji: '🇩🇰', continent: 'أوروبا', capital: 'كوبنهاغن', area: '43.1 ألف كم²', population: '5.9 مليون', language: 'الدنماركية', currency: 'كرونة دنماركية', gdp: '$413 مليار', timezone: 'GMT+1', government: 'ملكية برلمانية' },
-      { name: 'النمسا', emoji: '🇦🇹', continent: 'أوروبا', capital: 'فيينا', area: '83.9 ألف كم²', population: '9.4 مليون', language: 'الألمانية', currency: 'يورو', gdp: '$568 مليار', timezone: 'GMT+1', government: 'جمهورية برلمانية' },
-      { name: 'سويسرا', emoji: '🇨🇭', continent: 'أوروبا', capital: 'برن', area: '41.3 ألف كم²', population: '8.9 مليون', language: 'الألمانية والفرنسية والإيطالية', currency: 'فرنك سويسري', gdp: '$1.1 تريليون', timezone: 'GMT+1', government: 'جمهورية فيدرالية' },
-      { name: 'جمهورية التشيك', emoji: '🇨🇿', continent: 'أوروبا', capital: 'براغ', area: '79 ألف كم²', population: '10.5 مليون', language: 'التشيكية', currency: 'كرونة تشيكية', gdp: '$309 مليار', timezone: 'GMT+1', government: 'جمهورية برلمانية' },
-      { name: 'رومانيا', emoji: '🇷🇴', continent: 'أوروبا', capital: 'بوخارست', area: '238 ألف كم²', population: '19 مليون', language: 'الرومانية', currency: 'لاي روماني', gdp: '$378 مليار', timezone: 'GMT+2', government: 'جمهورية برلمانية' },
-      { name: 'بلغاريا', emoji: '🇧🇬', continent: 'أوروبا', capital: 'صوفيا', area: '110 ألف كم²', population: '6.9 مليون', language: 'البلغارية', currency: 'ليف بلغاري', gdp: '$115 مليار', timezone: 'GMT+2', government: 'جمهورية برلمانية' },
-      { name: 'المجر', emoji: '🇭🇺', continent: 'أوروبا', capital: 'بودابست', area: '93 ألف كم²', population: '9.7 مليون', language: 'الهنغارية', currency: 'فورنت هنغاري', gdp: '$254 مليار', timezone: 'GMT+1', government: 'جمهورية برلمانية' },
-      { name: 'أوكرانيا', emoji: '🇺🇦', continent: 'أوروبا', capital: 'كييف', area: '604 ألف كم²', population: '38 مليون', language: 'الأوكرانية', currency: 'هريفنيا أوكرانية', gdp: '$207 مليار', timezone: 'GMT+2', government: 'جمهورية برلمانية' },
+      { name: 'ألمانيا', emoji: '🇩🇪', code: 'DE', continent: 'أوروبا', capital: 'برلين', area: '357 ألف كم²', population: '84 مليون', language: 'الألمانية', currency: 'يورو', gdp: '$4.5 تريليون', timezone: 'GMT+1', government: 'جمهورية فيدرالية' },
+      { name: 'فرنسا', emoji: '🇫🇷', code: 'FR', continent: 'أوروبا', capital: 'باريس', area: '643 ألف كم²', population: '68 مليون', language: 'الفرنسية', currency: 'يورو', gdp: '$3.0 تريليون', timezone: 'GMT+1', government: 'جمهورية نصف رئاسية' },
+      { name: 'إيطاليا', emoji: '🇮🇹', code: 'IT', continent: 'أوروبا', capital: 'روما', area: '301 ألف كم²', population: '57 مليون', language: 'الإيطالية', currency: 'يورو', gdp: '$2.2 تريليون', timezone: 'GMT+1', government: 'جمهورية برلمانية' },
+      { name: 'إسبانيا', emoji: '🇪🇸', code: 'ES', continent: 'أوروبا', capital: 'مدريد', area: '506 ألف كم²', population: '48 مليون', language: 'الإسبانية', currency: 'يورو', gdp: '$1.5 تريليون', timezone: 'GMT+1', government: 'ملكية دستورية' },
+      { name: 'بولندا', emoji: '🇵🇱', code: 'PL', continent: 'أوروبا', capital: 'وارسو', area: '312 ألف كم²', population: '37 مليون', language: 'البولندية', currency: 'زلوتي بولندي', gdp: '$889 مليار', timezone: 'GMT+1', government: 'جمهورية برلمانية' },
+      { name: 'المملكة المتحدة', emoji: '🇬🇧', code: 'GB', continent: 'أوروبا', capital: 'لندن', area: '243 ألف كم²', population: '68 مليون', language: 'الإنجليزية', currency: 'جنيه استرليني', gdp: '$3.3 تريليون', timezone: 'GMT+0', government: 'ملكية برلمانية' },
+      { name: 'هولندا', emoji: '🇳🇱', code: 'NL', continent: 'أوروبا', capital: 'أمستردام', area: '41.5 ألف كم²', population: '18 مليون', language: 'الهولندية', currency: 'يورو', gdp: '$1.3 تريليون', timezone: 'GMT+1', government: 'ملكية برلمانية' },
+      { name: 'بلجيكا', emoji: '🇧🇪', code: 'BE', continent: 'أوروبا', capital: 'بروكسل', area: '30.5 ألف كم²', population: '11.6 مليون', language: 'الهولندية والفرنسية', currency: 'يورو', gdp: '$743 مليار', timezone: 'GMT+1', government: 'ملكية فيدرالية' },
+      { name: 'اليونان', emoji: '🇬🇷', code: 'GR', continent: 'أوروبا', capital: 'أثينا', area: '132 ألف كم²', population: '10.7 مليون', language: 'اليونانية', currency: 'يورو', gdp: '$242 مليار', timezone: 'GMT+2', government: 'جمهورية برلمانية' },
+      { name: 'البرتغال', emoji: '🇵🇹', code: 'PT', continent: 'أوروبا', capital: 'لشبونة', area: '92 ألف كم²', population: '10.4 مليون', language: 'البرتغالية', currency: 'يورو', gdp: '$297 مليار', timezone: 'GMT+0', government: 'جمهورية برلمانية' },
+      { name: 'السويد', emoji: '🇸🇪', code: 'SE', continent: 'أوروبا', capital: 'ستوكهولم', area: '450 ألف كم²', population: '10.5 مليون', language: 'السويدية', currency: 'كرونة سويدية', gdp: '$617 مليار', timezone: 'GMT+1', government: 'ملكية برلمانية' },
+      { name: 'النرويج', emoji: '🇳🇴', code: 'NO', continent: 'أوروبا', capital: 'أوسلو', area: '385 ألف كم²', population: '5.5 مليون', language: 'النرويجية', currency: 'كرونة نرويجية', gdp: '$570 مليار', timezone: 'GMT+1', government: 'ملكية برلمانية' },
+      { name: 'فنلندا', emoji: '🇫🇮', code: 'FI', continent: 'أوروبا', capital: 'هلسنكي', area: '338 ألف كم²', population: '5.6 مليون', language: 'الفنلندية', currency: 'يورو', gdp: '$382 مليار', timezone: 'GMT+2', government: 'جمهورية برلمانية' },
+      { name: 'الدنمارك', emoji: '🇩🇰', code: 'DK', continent: 'أوروبا', capital: 'كوبنهاغن', area: '43.1 ألف كم²', population: '5.9 مليون', language: 'الدنماركية', currency: 'كرونة دنماركية', gdp: '$413 مليار', timezone: 'GMT+1', government: 'ملكية برلمانية' },
+      { name: 'النمسا', emoji: '🇦🇹', code: 'AT', continent: 'أوروبا', capital: 'فيينا', area: '83.9 ألف كم²', population: '9.4 مليون', language: 'الألمانية', currency: 'يورو', gdp: '$568 مليار', timezone: 'GMT+1', government: 'جمهورية برلمانية' },
+      { name: 'سويسرا', emoji: '🇨🇭', code: 'CH', continent: 'أوروبا', capital: 'برن', area: '41.3 ألف كم²', population: '8.9 مليون', language: 'الألمانية والفرنسية والإيطالية', currency: 'فرنك سويسري', gdp: '$1.1 تريليون', timezone: 'GMT+1', government: 'جمهورية فيدرالية' },
+      { name: 'جمهورية التشيك', emoji: '🇨🇿', code: 'CZ', continent: 'أوروبا', capital: 'براغ', area: '79 ألف كم²', population: '10.5 مليون', language: 'التشيكية', currency: 'كرونة تشيكية', gdp: '$309 مليار', timezone: 'GMT+1', government: 'جمهورية برلمانية' },
+      { name: 'رومانيا', emoji: '🇷🇴', code: 'RO', continent: 'أوروبا', capital: 'بوخارست', area: '238 ألف كم²', population: '19 مليون', language: 'الرومانية', currency: 'لاي روماني', gdp: '$378 مليار', timezone: 'GMT+2', government: 'جمهورية برلمانية' },
+      { name: 'بلغاريا', emoji: '🇧🇬', code: 'BG', continent: 'أوروبا', capital: 'صوفيا', area: '110 ألف كم²', population: '6.9 مليون', language: 'البلغارية', currency: 'ليف بلغاري', gdp: '$115 مليار', timezone: 'GMT+2', government: 'جمهورية برلمانية' },
+      { name: 'المجر', emoji: '🇭🇺', code: 'HU', continent: 'أوروبا', capital: 'بودابست', area: '93 ألف كم²', population: '9.7 مليون', language: 'الهنغارية', currency: 'فورنت هنغاري', gdp: '$254 مليار', timezone: 'GMT+1', government: 'جمهورية برلمانية' },
+      { name: 'أوكرانيا', emoji: '🇺🇦', code: 'UA', continent: 'أوروبا', capital: 'كييف', area: '604 ألف كم²', population: '38 مليون', language: 'الأوكرانية', currency: 'هريفنيا أوكرانية', gdp: '$207 مليار', timezone: 'GMT+2', government: 'جمهورية برلمانية' },
 
       // أمريكا الشمالية
-      { name: 'الولايات المتحدة', emoji: '🇺🇸', continent: 'أمريكا الشمالية', capital: 'واشنطن دي سي', area: '9.8 مليون كم²', population: '340 مليون', language: 'الإنجليزية', currency: 'دولار أمريكي', gdp: '$27 تريليون', timezone: 'GMT-5 إلى GMT-8', government: 'جمهورية فيدرالية' },
-      { name: 'كندا', emoji: '🇨🇦', continent: 'أمريكا الشمالية', capital: 'أوتاوا', area: '10 مليون كم²', population: '39 مليون', language: 'الإنجليزية والفرنسية', currency: 'دولار كندي', gdp: '$2.3 تريليون', timezone: 'GMT-3:30 إلى GMT-8', government: 'ملكية فيدرالية' },
-      { name: 'المكسيك', emoji: '🇲🇽', continent: 'أمريكا الشمالية', capital: 'مكسيكو سيتي', area: '1.96 مليون كم²', population: '128 مليون', language: 'الإسبانية', currency: 'بيزو مكسيكي', gdp: '$1.4 تريليون', timezone: 'GMT-6 إلى GMT-8', government: 'جمهورية فيدرالية' },
-      { name: 'كوبا', emoji: '🇨🇺', continent: 'أمريكا الشمالية', capital: 'هافانا', area: '110 ألف كم²', population: '11 مليون', language: 'الإسبانية', currency: 'بيزو كوبي', gdp: '$137 مليار', timezone: 'GMT-5', government: 'جمهورية اشتراكية' },
-      { name: 'جمهورية الدومينيكان', emoji: '🇩🇴', continent: 'أمريكا الشمالية', capital: 'سانتو دومينغو', area: '48.7 ألف كم²', population: '11 مليون', language: 'الإسبانية', currency: 'بيزو دومينيكاني', gdp: '$115 مليار', timezone: 'GMT-4', government: 'جمهورية' },
-      { name: 'هايتي', emoji: '🇭🇹', continent: 'أمريكا الشمالية', capital: 'بورت أوبرنس', area: '27.8 ألف كم²', population: '11.4 مليون', language: 'الفرنسية والكريولية', currency: 'غورد هايتي', gdp: '$20 مليار', timezone: 'GMT-5', government: 'جمهورية' },
-      { name: 'جامايكا', emoji: '🇯🇲', continent: 'أمريكا الشمالية', capital: 'كينغستون', area: '11.4 ألف كم²', population: '2.8 مليون', language: 'الإنجليزية', currency: 'دولار جامايكي', gdp: '$18 مليار', timezone: 'GMT-5', government: 'ملكية برلمانية' },
-      { name: 'بنما', emoji: '🇵🇦', continent: 'أمريكا الشمالية', capital: 'بنما سيتي', area: '75.4 ألف كم²', population: '4.4 مليون', language: 'الإسبانية والإنجليزية', currency: 'بالبوا بنمي', gdp: '$81 مليار', timezone: 'GMT-5', government: 'جمهورية' },
-      { name: 'بليز', emoji: '🇧🇿', continent: 'أمريكا الشمالية', capital: 'بيلموبان', area: '22.8 ألف كم²', population: '0.4 مليون', language: 'الإنجليزية', currency: 'دولار بليزي', gdp: '$2.4 مليار', timezone: 'GMT-6', government: 'ملكية برلمانية' },
-      { name: 'كوستاريكا', emoji: '🇨🇷', continent: 'أمريكا الشمالية', capital: 'سان خوسيه', area: '51.1 ألف كم²', population: '5.2 مليون', language: 'الإسبانية', currency: 'كولن كوستاريكي', gdp: '$64 مليار', timezone: 'GMT-6', government: 'جمهورية' },
-      { name: 'هندوراس', emoji: '🇭🇳', continent: 'أمريكا الشمالية', capital: 'تيغوسيغالبا', area: '112 ألف كم²', population: '10 مليون', language: 'الإسبانية', currency: 'ليمبيرا هندوراسية', gdp: '$31 مليار', timezone: 'GMT-6', government: 'جمهورية' },
-      { name: 'السلفادور', emoji: '🇸🇻', continent: 'أمريكا الشمالية', capital: 'سان سلفادور', area: '21.0 ألف كم²', population: '6.5 مليون', language: 'الإسبانية', currency: 'دولار أمريكي', gdp: '$32 مليار', timezone: 'GMT-6', government: 'جمهورية' },
-      { name: 'نيكاراغوا', emoji: '🇳🇮', continent: 'أمريكا الشمالية', capital: 'ماناغوا', area: '130 ألف كم²', population: '7.2 مليون', language: 'الإسبانية', currency: 'كوردوبا نيكاراغوية', gdp: '$33 مليار', timezone: 'GMT-6', government: 'جمهورية' },
-      { name: 'غواتيمالا', emoji: '🇬🇹', continent: 'أمريكا الشمالية', capital: 'مدينة غواتيمالا', area: '108 ألف كم²', population: '18 مليون', language: 'الإسبانية', currency: 'كتزال غواتيمالي', gdp: '$88 مليار', timezone: 'GMT-6', government: 'جمهورية' },
+      { name: 'الولايات المتحدة', emoji: '🇺🇸', code: 'US', continent: 'أمريكا الشمالية', capital: 'واشنطن دي سي', area: '9.8 مليون كم²', population: '340 مليون', language: 'الإنجليزية', currency: 'دولار أمريكي', gdp: '$27 تريليون', timezone: 'GMT-5 إلى GMT-8', government: 'جمهورية فيدرالية' },
+      { name: 'كندا', emoji: '🇨🇦', code: 'CA', continent: 'أمريكا الشمالية', capital: 'أوتاوا', area: '10 مليون كم²', population: '39 مليون', language: 'الإنجليزية والفرنسية', currency: 'دولار كندي', gdp: '$2.3 تريليون', timezone: 'GMT-3:30 إلى GMT-8', government: 'ملكية فيدرالية' },
+      { name: 'المكسيك', emoji: '🇲🇽', code: 'MX', continent: 'أمريكا الشمالية', capital: 'مكسيكو سيتي', area: '1.96 مليون كم²', population: '128 مليون', language: 'الإسبانية', currency: 'بيزو مكسيكي', gdp: '$1.4 تريليون', timezone: 'GMT-6 إلى GMT-8', government: 'جمهورية فيدرالية' },
+      { name: 'كوبا', emoji: '🇨🇺', code: 'CU', continent: 'أمريكا الشمالية', capital: 'هافانا', area: '110 ألف كم²', population: '11 مليون', language: 'الإسبانية', currency: 'بيزو كوبي', gdp: '$137 مليار', timezone: 'GMT-5', government: 'جمهورية اشتراكية' },
+      { name: 'جمهورية الدومينيكان', emoji: '🇩🇴', code: 'DO', continent: 'أمريكا الشمالية', capital: 'سانتو دومينغو', area: '48.7 ألف كم²', population: '11 مليون', language: 'الإسبانية', currency: 'بيزو دومينيكاني', gdp: '$115 مليار', timezone: 'GMT-4', government: 'جمهورية' },
+      { name: 'هايتي', emoji: '🇭🇹', code: 'HT', continent: 'أمريكا الشمالية', capital: 'بورت أوبرنس', area: '27.8 ألف كم²', population: '11.4 مليون', language: 'الفرنسية والكريولية', currency: 'غورد هايتي', gdp: '$20 مليار', timezone: 'GMT-5', government: 'جمهورية' },
+      { name: 'جامايكا', emoji: '🇯🇲', code: 'JM', continent: 'أمريكا الشمالية', capital: 'كينغستون', area: '11.4 ألف كم²', population: '2.8 مليون', language: 'الإنجليزية', currency: 'دولار جامايكي', gdp: '$18 مليار', timezone: 'GMT-5', government: 'ملكية برلمانية' },
+      { name: 'بنما', emoji: '🇵🇦', code: 'PA', continent: 'أمريكا الشمالية', capital: 'بنما سيتي', area: '75.4 ألف كم²', population: '4.4 مليون', language: 'الإسبانية والإنجليزية', currency: 'بالبوا بنمي', gdp: '$81 مليار', timezone: 'GMT-5', government: 'جمهورية' },
+      { name: 'بليز', emoji: '🇧🇿', code: 'BZ', continent: 'أمريكا الشمالية', capital: 'بيلموبان', area: '22.8 ألف كم²', population: '0.4 مليون', language: 'الإنجليزية', currency: 'دولار بليزي', gdp: '$2.4 مليار', timezone: 'GMT-6', government: 'ملكية برلمانية' },
+      { name: 'كوستاريكا', emoji: '🇨🇷', code: 'CR', continent: 'أمريكا الشمالية', capital: 'سان خوسيه', area: '51.1 ألف كم²', population: '5.2 مليون', language: 'الإسبانية', currency: 'كولن كوستاريكي', gdp: '$64 مليار', timezone: 'GMT-6', government: 'جمهورية' },
+      { name: 'هندوراس', emoji: '🇭🇳', code: 'HN', continent: 'أمريكا الشمالية', capital: 'تيغوسيغالبا', area: '112 ألف كم²', population: '10 مليون', language: 'الإسبانية', currency: 'ليمبيرا هندوراسية', gdp: '$31 مليار', timezone: 'GMT-6', government: 'جمهورية' },
+      { name: 'السلفادور', emoji: '🇸🇻', code: 'SV', continent: 'أمريكا الشمالية', capital: 'سان سلفادور', area: '21.0 ألف كم²', population: '6.5 مليون', language: 'الإسبانية', currency: 'دولار أمريكي', gdp: '$32 مليار', timezone: 'GMT-6', government: 'جمهورية' },
+      { name: 'نيكاراغوا', emoji: '🇳🇮', code: 'NI', continent: 'أمريكا الشمالية', capital: 'ماناغوا', area: '130 ألف كم²', population: '7.2 مليون', language: 'الإسبانية', currency: 'كوردوبا نيكاراغوية', gdp: '$33 مليار', timezone: 'GMT-6', government: 'جمهورية' },
+      { name: 'غواتيمالا', emoji: '🇬🇹', code: 'GT', continent: 'أمريكا الشمالية', capital: 'مدينة غواتيمالا', area: '108 ألف كم²', population: '18 مليون', language: 'الإسبانية', currency: 'كتزال غواتيمالي', gdp: '$88 مليار', timezone: 'GMT-6', government: 'جمهورية' },
 
       // أمريكا الجنوبية
-      { name: 'البرازيل', emoji: '🇧🇷', continent: 'أمريكا الجنوبية', capital: 'برازيليا', area: '8.5 مليون كم²', population: '216 مليون', language: 'البرتغالية', currency: 'ريال برازيلي', gdp: '$2.1 تريليون', timezone: 'GMT-2 إلى GMT-5', government: 'جمهورية فيدرالية' },
-      { name: 'الأرجنتين', emoji: '🇦🇷', continent: 'أمريكا الجنوبية', capital: 'بوينس آيريس', area: '2.8 مليون كم²', population: '46 مليون', language: 'الإسبانية', currency: 'بيزو أرجنتيني', gdp: '$687 مليار', timezone: 'GMT-3', government: 'جمهورية فيدرالية' },
-      { name: 'كولومبيا', emoji: '🇨🇴', continent: 'أمريكا الجنوبية', capital: 'بوغوتا', area: '1.1 مليون كم²', population: '52 مليون', language: 'الإسبانية', currency: 'بيزو كولومبي', gdp: '$418 مليار', timezone: 'GMT-5', government: 'جمهورية' },
-      { name: 'بيرو', emoji: '🇵🇪', continent: 'أمريكا الجنوبية', capital: 'ليما', area: '1.3 مليون كم²', population: '35 مليون', language: 'الإسبانية', currency: 'سول بيروفي', gdp: '$285 مليار', timezone: 'GMT-5', government: 'جمهورية' },
-      { name: 'تشيلي', emoji: '🇨🇱', continent: 'أمريكا الجنوبية', capital: 'سانتياغو', area: '756 ألف كم²', population: '19.6 مليون', language: 'الإسبانية', currency: 'بيزو تشيلي', gdp: '$372 مليار', timezone: 'GMT-3 إلى GMT-5', government: 'جمهورية' },
-      { name: 'فنزويلا', emoji: '🇻🇪', continent: 'أمريكا الجنوبية', capital: 'كاراكاس', area: '916 ألف كم²', population: '28.4 مليون', language: 'الإسبانية', currency: 'بوليفار فنزويلي', gdp: '$74 مليار', timezone: 'GMT-4', government: 'جمهورية' },
-      { name: 'الإكوادور', emoji: '🇪🇨', continent: 'أمريكا الجنوبية', capital: 'كيتو', area: '256 ألف كم²', population: '18 مليون', language: 'الإسبانية', currency: 'دولار أمريكي', gdp: '$119 مليار', timezone: 'GMT-5', government: 'جمهورية' },
-      { name: 'بوليفيا', emoji: '🇧🇴', continent: 'أمريكا الجنوبية', capital: 'لاباز وسوكري', area: '1.1 مليون كم²', population: '12 مليون', language: 'الإسبانية', currency: 'بوليفيانو', gdp: '$47 مليار', timezone: 'GMT-4', government: 'جمهورية' },
-      { name: 'باراغواي', emoji: '🇵🇾', continent: 'أمريكا الجنوبية', capital: 'أسونسيون', area: '407 ألف كم²', population: '7.2 مليون', language: 'الإسبانية والغواراني', currency: 'غواراني باراغواي', gdp: '$43 مليار', timezone: 'GMT-4', government: 'جمهورية' },
-      { name: 'أوروغواي', emoji: '🇺🇾', continent: 'أمريكا الجنوبية', capital: 'مونتيفيديو', area: '176 ألف كم²', population: '3.4 مليون', language: 'الإسبانية', currency: 'بيزو أوروغواي', gdp: '$78 مليار', timezone: 'GMT-3', government: 'جمهورية' },
-      { name: 'غيانا', emoji: '🇬🇾', continent: 'أمريكا الجنوبية', capital: 'جورجتاون', area: '215 ألف كم²', population: '0.8 مليون', language: 'الإنجليزية', currency: 'دولار غيانا', gdp: '$18 مليار', timezone: 'GMT-4', government: 'جمهورية' },
-      { name: 'سورينام', emoji: '🇸🇷', continent: 'أمريكا الجنوبية', capital: 'باراماريبو', area: '163 ألف كم²', population: '0.6 مليون', language: 'الهولندية', currency: 'دولار سورينام', gdp: '$7 مليار', timezone: 'GMT-3', government: 'جمهورية' },
+      { name: 'البرازيل', emoji: '🇧🇷', code: 'BR', continent: 'أمريكا الجنوبية', capital: 'برازيليا', area: '8.5 مليون كم²', population: '216 مليون', language: 'البرتغالية', currency: 'ريال برازيلي', gdp: '$2.1 تريليون', timezone: 'GMT-2 إلى GMT-5', government: 'جمهورية فيدرالية' },
+      { name: 'الأرجنتين', emoji: '🇦🇷', code: 'AR', continent: 'أمريكا الجنوبية', capital: 'بوينس آيريس', area: '2.8 مليون كم²', population: '46 مليون', language: 'الإسبانية', currency: 'بيزو أرجنتيني', gdp: '$687 مليار', timezone: 'GMT-3', government: 'جمهورية فيدرالية' },
+      { name: 'كولومبيا', emoji: '🇨🇴', code: 'CO', continent: 'أمريكا الجنوبية', capital: 'بوغوتا', area: '1.1 مليون كم²', population: '52 مليون', language: 'الإسبانية', currency: 'بيزو كولومبي', gdp: '$418 مليار', timezone: 'GMT-5', government: 'جمهورية' },
+      { name: 'بيرو', emoji: '🇵🇪', code: 'PE', continent: 'أمريكا الجنوبية', capital: 'ليما', area: '1.3 مليون كم²', population: '35 مليون', language: 'الإسبانية', currency: 'سول بيروفي', gdp: '$285 مليار', timezone: 'GMT-5', government: 'جمهورية' },
+      { name: 'تشيلي', emoji: '🇨🇱', code: 'CL', continent: 'أمريكا الجنوبية', capital: 'سانتياغو', area: '756 ألف كم²', population: '19.6 مليون', language: 'الإسبانية', currency: 'بيزو تشيلي', gdp: '$372 مليار', timezone: 'GMT-3 إلى GMT-5', government: 'جمهورية' },
+      { name: 'فنزويلا', emoji: '🇻🇪', code: 'VE', continent: 'أمريكا الجنوبية', capital: 'كاراكاس', area: '916 ألف كم²', population: '28.4 مليون', language: 'الإسبانية', currency: 'بوليفار فنزويلي', gdp: '$74 مليار', timezone: 'GMT-4', government: 'جمهورية' },
+      { name: 'الإكوادور', emoji: '🇪🇨', code: 'EC', continent: 'أمريكا الجنوبية', capital: 'كيتو', area: '256 ألف كم²', population: '18 مليون', language: 'الإسبانية', currency: 'دولار أمريكي', gdp: '$119 مليار', timezone: 'GMT-5', government: 'جمهورية' },
+      { name: 'بوليفيا', emoji: '🇧🇴', code: 'BO', continent: 'أمريكا الجنوبية', capital: 'لاباز وسوكري', area: '1.1 مليون كم²', population: '12 مليون', language: 'الإسبانية', currency: 'بوليفيانو', gdp: '$47 مليار', timezone: 'GMT-4', government: 'جمهورية' },
+      { name: 'باراغواي', emoji: '🇵🇾', code: 'PY', continent: 'أمريكا الجنوبية', capital: 'أسونسيون', area: '407 ألف كم²', population: '7.2 مليون', language: 'الإسبانية والغواراني', currency: 'غواراني باراغواي', gdp: '$43 مليار', timezone: 'GMT-4', government: 'جمهورية' },
+      { name: 'أوروغواي', emoji: '🇺🇾', code: 'UY', continent: 'أمريكا الجنوبية', capital: 'مونتيفيديو', area: '176 ألف كم²', population: '3.4 مليون', language: 'الإسبانية', currency: 'بيزو أوروغواي', gdp: '$78 مليار', timezone: 'GMT-3', government: 'جمهورية' },
+      { name: 'غيانا', emoji: '🇬🇾', code: 'GY', continent: 'أمريكا الجنوبية', capital: 'جورجتاون', area: '215 ألف كم²', population: '0.8 مليون', language: 'الإنجليزية', currency: 'دولار غيانا', gdp: '$18 مليار', timezone: 'GMT-4', government: 'جمهورية' },
+      { name: 'سورينام', emoji: '🇸🇷', code: 'SR', continent: 'أمريكا الجنوبية', capital: 'باراماريبو', area: '163 ألف كم²', population: '0.6 مليون', language: 'الهولندية', currency: 'دولار سورينام', gdp: '$7 مليار', timezone: 'GMT-3', government: 'جمهورية' },
 
       // أوقيانوسيا
-      { name: 'أستراليا', emoji: '🇦🇺', continent: 'أوقيانوسيا', capital: 'كانبيرا', area: '7.7 مليون كم²', population: '26 مليون', language: 'الإنجليزية', currency: 'دولار أسترالي', gdp: '$1.7 تريليون', timezone: 'GMT+8 إلى GMT+10', government: 'ملكية فيدرالية' },
-      { name: 'نيوزيلندا', emoji: '🇳🇿', continent: 'أوقيانوسيا', capital: 'ويلينغتون', area: '270 ألف كم²', population: '5.2 مليون', language: 'الإنجليزية والماوري', currency: 'دولار نيوزيلندي', gdp: '$264 مليار', timezone: 'GMT+12 إلى GMT+13', government: 'ملكية برلمانية' },
-      { name: 'فيجي', emoji: '🇫🇯', continent: 'أوقيانوسيا', capital: 'سوفا', area: '18.3 ألف كم²', population: '0.9 مليون', language: 'الفيجية والإنجليزية', currency: 'دولار فيجي', gdp: '$4.2 مليار', timezone: 'GMT+12', government: 'جمهورية' },
-      { name: 'بابوا غينيا الجديدة', emoji: '🇵🇬', continent: 'أوقيانوسيا', capital: 'بورت مورسبي', area: '463 ألف كم²', population: '10 مليون', language: 'الإنجليزية والبيجينية', currency: 'كينا بابوا', gdp: '$29 مليار', timezone: 'GMT+10', government: 'ملكية برلمانية' },
-      { name: 'جزر سليمان', emoji: '🇸🇧', continent: 'أوقيانوسيا', capital: 'هونيارا', area: '28.9 ألف كم²', population: '0.7 مليون', language: 'الإنجليزية', currency: 'دولار جزر سليمان', gdp: '$1.9 مليار', timezone: 'GMT+11', government: 'ملكية برلمانية' },
-      { name: 'فانواتو', emoji: '🇻🇺', continent: 'أوقيانوسيا', capital: 'بورت فيلا', area: '12.2 ألف كم²', population: '0.3 مليون', language: 'البيسلاما والإنجليزية والفرنسية', currency: 'فاتو فانواتي', gdp: '$0.8 مليار', timezone: 'GMT+11', government: 'جمهورية' },
-      { name: 'ساموا', emoji: '🇼🇸', continent: 'أوقيانوسيا', capital: 'أبيا', area: '2.8 ألف كم²', population: '0.2 مليون', language: 'الساموانية والإنجليزية', currency: 'تالا ساموانية', gdp: '$0.9 مليار', timezone: 'GMT+13', government: 'ملكية برلمانية' },
-      { name: 'كيريباتي', emoji: '🇰🇮', continent: 'أوقيانوسيا', capital: 'تاراوا', area: '811 كم²', population: '0.1 مليون', language: 'الكيريباتية والإنجليزية', currency: 'دولار أسترالي', gdp: '$0.3 مليار', timezone: 'GMT+12 إلى GMT+14', government: 'جمهورية' },
-      { name: 'توفالو', emoji: '🇹🇻', continent: 'أوقيانوسيا', capital: 'فونافوتي', area: '26 كم²', population: '0.01 مليون', language: 'التوفالوان والإنجليزية', currency: 'دولار أسترالي', gdp: '$0.07 مليار', timezone: 'GMT+12', government: 'ملكية برلمانية' },
-      { name: 'ناورو', emoji: '🇳🇷', continent: 'أوقيانوسيا', capital: 'يارين', area: '21 كم²', population: '0.01 مليون', language: 'الناوروان والإنجليزية', currency: 'دولار أسترالي', gdp: '$0.1 مليار', timezone: 'GMT+12', government: 'جمهورية برلمانية' }
+      { name: 'أستراليا', emoji: '🇦🇺', code: 'AU', continent: 'أوقيانوسيا', capital: 'كانبيرا', area: '7.7 مليون كم²', population: '26 مليون', language: 'الإنجليزية', currency: 'دولار أسترالي', gdp: '$1.7 تريليون', timezone: 'GMT+8 إلى GMT+10', government: 'ملكية فيدرالية' },
+      { name: 'نيوزيلندا', emoji: '🇳🇿', code: 'NZ', continent: 'أوقيانوسيا', capital: 'ويلينغتون', area: '270 ألف كم²', population: '5.2 مليون', language: 'الإنجليزية والماوري', currency: 'دولار نيوزيلندي', gdp: '$264 مليار', timezone: 'GMT+12 إلى GMT+13', government: 'ملكية برلمانية' },
+      { name: 'فيجي', emoji: '🇫🇯', code: 'FJ', continent: 'أوقيانوسيا', capital: 'سوفا', area: '18.3 ألف كم²', population: '0.9 مليون', language: 'الفيجية والإنجليزية', currency: 'دولار فيجي', gdp: '$4.2 مليار', timezone: 'GMT+12', government: 'جمهورية' },
+      { name: 'بابوا غينيا الجديدة', emoji: '🇵🇬', code: 'PG', continent: 'أوقيانوسيا', capital: 'بورت مورسبي', area: '463 ألف كم²', population: '10 مليون', language: 'الإنجليزية والبيجينية', currency: 'كينا بابوا', gdp: '$29 مليار', timezone: 'GMT+10', government: 'ملكية برلمانية' },
+      { name: 'جزر سليمان', emoji: '🇸🇧', code: 'SB', continent: 'أوقيانوسيا', capital: 'هونيارا', area: '28.9 ألف كم²', population: '0.7 مليون', language: 'الإنجليزية', currency: 'دولار جزر سليمان', gdp: '$1.9 مليار', timezone: 'GMT+11', government: 'ملكية برلمانية' },
+      { name: 'فانواتو', emoji: '🇻🇺', code: 'VU', continent: 'أوقيانوسيا', capital: 'بورت فيلا', area: '12.2 ألف كم²', population: '0.3 مليون', language: 'البيسلاما والإنجليزية والفرنسية', currency: 'فاتو فانواتي', gdp: '$0.8 مليار', timezone: 'GMT+11', government: 'جمهورية' },
+      { name: 'ساموا', emoji: '🇼🇸', code: 'WS', continent: 'أوقيانوسيا', capital: 'أبيا', area: '2.8 ألف كم²', population: '0.2 مليون', language: 'الساموانية والإنجليزية', currency: 'تالا ساموانية', gdp: '$0.9 مليار', timezone: 'GMT+13', government: 'ملكية برلمانية' },
+      { name: 'كيريباتي', emoji: '🇰🇮', code: 'KI', continent: 'أوقيانوسيا', capital: 'تاراوا', area: '811 كم²', population: '0.1 مليون', language: 'الكيريباتية والإنجليزية', currency: 'دولار أسترالي', gdp: '$0.3 مليار', timezone: 'GMT+12 إلى GMT+14', government: 'جمهورية' },
+      { name: 'توفالو', emoji: '🇹🇻', code: 'TV', continent: 'أوقيانوسيا', capital: 'فونافوتي', area: '26 كم²', population: '0.01 مليون', language: 'التوفالوان والإنجليزية', currency: 'دولار أسترالي', gdp: '$0.07 مليار', timezone: 'GMT+12', government: 'ملكية برلمانية' },
+      { name: 'ناورو', emoji: '🇳🇷', code: 'NR', continent: 'أوقيانوسيا', capital: 'يارين', area: '21 كم²', population: '0.01 مليون', language: 'الناوروان والإنجليزية', currency: 'دولار أسترالي', gdp: '$0.1 مليار', timezone: 'GMT+12', government: 'جمهورية برلمانية' },
+      
+      // دول آسيا الإضافية
+      { name: 'كوريا الشمالية', emoji: '🇰🇵', code: 'KP', continent: 'آسيا', capital: 'بيونغ يانغ', area: '121 ألف كم²', population: '26 مليون', language: 'الكورية', currency: 'وون كوري شمالي', gdp: '$17 مليار', timezone: 'GMT+9', government: 'جمهورية ديمقراطية شعبية' },
+      { name: 'ميانمار', emoji: '🇲🇲', code: 'MM', continent: 'آسيا', capital: 'نايبيداو', area: '676 ألف كم²', population: '54 مليون', language: 'البورمية', currency: 'كيات بورمي', gdp: '$76 مليار', timezone: 'GMT+6:30', government: 'جمهورية' },
+      { name: 'كمبوديا', emoji: '🇰🇭', code: 'KH', continent: 'آسيا', capital: 'بنوم بنه', area: '181 ألف كم²', population: '17 مليون', language: 'الخميرية', currency: 'رييل كمبودي', gdp: '$38 مليار', timezone: 'GMT+7', government: 'ملكية' },
+      { name: 'لاوس', emoji: '🇱🇦', code: 'LA', continent: 'آسيا', capital: 'فينتيان', area: '237 ألف كم²', population: '7.3 مليون', language: 'اللاوية', currency: 'كيب لاوي', gdp: '$19 مليار', timezone: 'GMT+7', government: 'جمهورية' },
+      { name: 'بروناي', emoji: '🇧🇳', code: 'BN', continent: 'آسيا', capital: 'بندر سري بغاوان', area: '5.8 ألف كم²', population: '0.4 مليون', language: 'الملايو والإنجليزية', currency: 'دولار بروناي', gdp: '$17 مليار', timezone: 'GMT+8', government: 'سلطنة' },
+      { name: 'تيمور الشرقية', emoji: '🇹🇱', code: 'TL', continent: 'آسيا', capital: 'ديلي', area: '14.9 ألف كم²', population: '1.3 مليون', language: 'التيموري والإنجليزية', currency: 'دولار أمريكي', gdp: '$3.2 مليار', timezone: 'GMT+9', government: 'جمهورية' },
+      { name: 'منغوليا', emoji: '🇲🇳', code: 'MN', continent: 'آسيا', capital: 'أولان باتور', area: '1.6 مليون كم²', population: '3.3 مليون', language: 'المنغولية', currency: 'توغروك منغولي', gdp: '$15 مليار', timezone: 'GMT+8', government: 'جمهورية' },
+      { name: 'بوتان', emoji: '🇧🇹', code: 'BT', continent: 'آسيا', capital: 'ثيمفو', area: '38.8 ألف كم²', population: '0.8 مليون', language: 'الدزونكاخا', currency: 'نغولتروم بوتاني', gdp: '$2.7 مليار', timezone: 'GMT+6', government: 'ملكية' },
+      { name: 'المالديف', emoji: '🇲🇻', code: 'MV', continent: 'آسيا', capital: 'ماليه', area: '298 كم²', population: '0.5 مليون', language: 'الديفيهي', currency: 'روفيا مالديفية', gdp: '$4.2 مليار', timezone: 'GMT+5', government: 'جمهورية' },
+      { name: 'الأردن', emoji: '🇯🇴', code: 'JO', continent: 'آسيا', capital: 'عمّان', area: '89.3 ألف كم²', population: '10 مليون', language: 'العربية', currency: 'دينار أردني', gdp: '$48 مليار', timezone: 'GMT+3', government: 'ملكية دستورية' },
+      { name: 'بنغلاديش', emoji: '🇧🇩', code: 'BD', continent: 'آسيا', capital: 'داكا', area: '148 ألف كم²', population: '170 مليون', language: 'البنغالية', currency: 'تاكا بنغلاديشية', gdp: '$417 مليار', timezone: 'GMT+6', government: 'جمهورية' },
+      { name: 'تايلاند', emoji: '🇹🇭', code: 'TH', continent: 'آسيا', capital: 'بانكوك', area: '513 ألف كم²', population: '72 مليون', language: 'التايلاندية', currency: 'بات تايلاندي', gdp: '$505 مليار', timezone: 'GMT+7', government: 'ملكية دستورية' },
+      { name: 'لبنان', emoji: '🇱🇧', code: 'LB', continent: 'آسيا', capital: 'بيروت', area: '10.4 ألف كم²', population: '6.8 مليون', language: 'العربية والفرنسية', currency: 'ليرة لبنانية', gdp: '$16 مليار', timezone: 'GMT+2', government: 'جمهورية برلمانية' },
+      { name: 'سوريا', emoji: '🇸🇾', code: 'SY', continent: 'آسيا', capital: 'دمشق', area: '185 ألف كم²', population: '22 مليون', language: 'العربية', currency: 'ليرة سورية', gdp: '$28 مليار', timezone: 'GMT+2', government: 'جمهورية' },
+      { name: 'فلسطين', emoji: '🇵🇸', code: 'PS', continent: 'آسيا', capital: 'رام الله', area: '6.2 ألف كم²', population: '5.2 مليون', language: 'العربية', currency: 'دولار أمريكي', gdp: '$13 مليار', timezone: 'GMT+2', government: 'سلطة وطنية' },
+      { name: 'إسرائيل', emoji: '🇮🇱', code: 'IL', continent: 'آسيا', capital: 'القدس/تل أبيب', area: '20.8 ألف كم²', population: '9.3 مليون', language: 'العبرية والعربية', currency: 'شيكل إسرائيلي', gdp: '$529 مليار', timezone: 'GMT+2', government: 'جمهورية برلمانية' },
+      { name: 'عمّان', emoji: '🇴🇲', code: 'OM', continent: 'آسيا', capital: 'مسقط', area: '309 ألف كم²', population: '5.1 مليون', language: 'العربية', currency: 'ريال عماني', gdp: '$120 مليار', timezone: 'GMT+4', government: 'سلطنة' },
+      { name: 'اليمن', emoji: '🇾🇪', code: 'YE', continent: 'آسيا', capital: 'صنعاء', area: '528 ألف كم²', population: '35 مليون', language: 'العربية', currency: 'ريال يمني', gdp: '$28 مليار', timezone: 'GMT+3', government: 'جمهورية' },
+      { name: 'البحرين', emoji: '🇧🇭', code: 'BH', continent: 'آسيا', capital: 'المنامة', area: '765 كم²', population: '1.8 مليون', language: 'العربية', currency: 'دينار بحريني', gdp: '$40 مليار', timezone: 'GMT+3', government: 'إمارة' },
+      { name: 'أوزبكستان', emoji: '🇺🇿', code: 'UZ', continent: 'آسيا', capital: 'طشقند', area: '447 ألف كم²', population: '35 مليون', language: 'الأوزبكية', currency: 'سوم أوزبكي', gdp: '$92 مليار', timezone: 'GMT+5', government: 'جمهورية' },
+      { name: 'تركمانستان', emoji: '🇹🇲', code: 'TM', continent: 'آسيا', capital: 'عشقابات', area: '488 ألف كم²', population: '6.4 مليون', language: 'التركمانية', currency: 'مانات تركماني', gdp: '$71 مليار', timezone: 'GMT+5', government: 'جمهورية' },
+      { name: 'طاجيكستان', emoji: '🇹🇯', code: 'TJ', continent: 'آسيا', capital: 'دوشنبه', area: '143 ألف كم²', population: '10 مليون', language: 'الطاجيكية', currency: 'سوموني طاجيكي', gdp: '$37 مليار', timezone: 'GMT+5', government: 'جمهورية' },
+      { name: 'قيرغيزستان', emoji: '🇰🇬', code: 'KG', continent: 'آسيا', capital: 'بيشكيك', area: '199 ألف كم²', population: '6.9 مليون', language: 'القيرغيزية', currency: 'سوم قيرغيزي', gdp: '$37 مليار', timezone: 'GMT+6', government: 'جمهورية' },
+
+      // دول أفريقيا الإضافية
+      { name: 'جنوب السودان', emoji: '🇸🇸', code: 'SS', continent: 'إفريقيا', capital: 'جوبا', area: '644 ألف كم²', population: '11 مليون', language: 'الإنجليزية', currency: 'جنيه جنوب سوداني', gdp: '$3.3 مليار', timezone: 'GMT+2', government: 'جمهورية' },
+      { name: 'إريتريا', emoji: '🇪🇷', code: 'ER', continent: 'إفريقيا', capital: 'أسمرة', area: '117 ألف كم²', population: '6.4 مليون', language: 'التقراي والعربية', currency: 'ناكفا إريتري', gdp: '$1.4 مليار', timezone: 'GMT+3', government: 'جمهورية' },
+      { name: 'جيبوتي', emoji: '🇩🇯', code: 'DJ', continent: 'إفريقيا', capital: 'جيبوتي', area: '23.2 ألف كم²', population: '1.1 مليون', language: 'الفرنسية والعربية', currency: 'فرنك جيبوتي', gdp: '$3.1 مليار', timezone: 'GMT+3', government: 'جمهورية' },
+      { name: 'الصومال', emoji: '🇸🇴', code: 'SO', continent: 'إفريقيا', capital: 'مقديشو', area: '638 ألف كم²', population: '18 مليون', language: 'الصومالية والعربية', currency: 'شلن صومالي', gdp: '$7 مليار', timezone: 'GMT+3', government: 'جمهورية فيدرالية' },
+      { name: 'بوروندي', emoji: '🇧🇮', code: 'BI', continent: 'إفريقيا', capital: 'جيتيغا', area: '27.8 ألف كم²', population: '13 مليون', language: 'الكيرونثي والفرنسية', currency: 'فرنك بوروندي', gdp: '$3.7 مليار', timezone: 'GMT+2', government: 'جمهورية' },
+      { name: 'الكونغو الديمقراطية', emoji: '🇨🇩', code: 'CD', continent: 'إفريقيا', capital: 'كينشاسا', area: '2.3 مليون كم²', population: '99 مليون', language: 'الفرنسية', currency: 'فرنك كونغولي', gdp: '$58 مليار', timezone: 'GMT+1', government: 'جمهورية' },
+      { name: 'الكونغو', emoji: '🇨🇬', code: 'CG', continent: 'إفريقيا', capital: 'برازافيل', area: '342 ألف كم²', population: '6 مليون', language: 'الفرنسية', currency: 'فرنك إفريقي وسطي', gdp: '$11 مليار', timezone: 'GMT+1', government: 'جمهورية' },
+      { name: 'غابون', emoji: '🇬🇦', code: 'GA', continent: 'إفريقيا', capital: 'ليبرفيل', area: '267 ألف كم²', population: '2.4 مليون', language: 'الفرنسية', currency: 'فرنك إفريقي وسطي', gdp: '$24 مليار', timezone: 'GMT+1', government: 'جمهورية' },
+      { name: 'استوائية غينيا', emoji: '🇬🇶', code: 'GQ', continent: 'إفريقيا', capital: 'مالابو', area: '28.1 ألف كم²', population: '1.7 مليون', language: 'الإسبانية والفرنسية', currency: 'فرنك إفريقي وسطي', gdp: '$8 مليار', timezone: 'GMT+1', government: 'جمهورية' },
+      { name: 'سان توميه وبرينسيبي', emoji: '🇸🇹', code: 'ST', continent: 'إفريقيا', capital: 'سان توميه', area: '964 كم²', population: '0.2 مليون', language: 'البرتغالية', currency: 'دوبرا سان توميهي', gdp: '$0.6 مليار', timezone: 'GMT+0', government: 'جمهورية' },
+      { name: 'تشاد', emoji: '🇹🇩', code: 'TD', continent: 'إفريقيا', capital: 'نجامينا', area: '1.3 مليون كم²', population: '17 مليون', language: 'الفرنسية والعربية', currency: 'فرنك إفريقي وسطي', gdp: '$11 مليار', timezone: 'GMT+1', government: 'جمهورية' },
+      { name: 'أفريقيا الوسطى', emoji: '🇨🇫', code: 'CF', continent: 'إفريقيا', capital: 'بانغي', area: '622 ألف كم²', population: '5 مليون', language: 'الفرنسية', currency: 'فرنك إفريقي وسطي', gdp: '$2.3 مليار', timezone: 'GMT+1', government: 'جمهورية' },
+      { name: 'الكاميرون', emoji: '🇨🇲', code: 'CM', continent: 'إفريقيا', capital: 'ياوندي', area: '475 ألف كم²', population: '28 مليون', language: 'الفرنسية والإنجليزية', currency: 'فرنك إفريقي وسطي', gdp: '$48 مليار', timezone: 'GMT+1', government: 'جمهورية' },
+      { name: 'بوتسوانا', emoji: '🇧🇼', code: 'BW', continent: 'إفريقيا', capital: 'غابورون', area: '582 ألف كم²', population: '2.4 مليون', language: 'الإنجليزية والتسوانية', currency: 'بولا بوتسواني', gdp: '$21 مليار', timezone: 'GMT+2', government: 'جمهورية' },
+      { name: 'ليسوتو', emoji: '🇱🇸', code: 'LS', continent: 'إفريقيا', capital: 'ماسيرو', area: '30.4 ألف كم²', population: '2.3 مليون', language: 'السيسوتو والإنجليزية', currency: 'لوتي ليسوتي', gdp: '$3.2 مليار', timezone: 'GMT+2', government: 'ملكية' },
+      { name: 'إسواتيني', emoji: '🇸🇿', code: 'SZ', continent: 'إفريقيا', capital: 'مبابان', area: '17.4 ألف كم²', population: '1.2 مليون', language: 'السيسواتي والإنجليزية', currency: 'إماليجني إسواتيني', gdp: '$4 مليار', timezone: 'GMT+2', government: 'ملكية' },
+      { name: 'زيمبابوي', emoji: '🇿🇼', code: 'ZW', continent: 'إفريقيا', capital: 'هرارة', area: '391 ألف كم²', population: '15 مليون', language: 'الإنجليزية والشونا', currency: 'دولار زيمبابوي', gdp: '$33 مليار', timezone: 'GMT+2', government: 'جمهورية' },
+      { name: 'زامبيا', emoji: '🇿🇲', code: 'ZM', continent: 'إفريقيا', capital: 'لوساكا', area: '753 ألف كم²', population: '19 مليون', language: 'الإنجليزية', currency: 'كواشا زامبي', gdp: '$29 مليار', timezone: 'GMT+2', government: 'جمهورية' },
+      { name: 'ناميبيا', emoji: '🇳🇦', code: 'NA', continent: 'إفريقيا', capital: 'ويندهوك', area: '824 ألف كم²', population: '2.6 مليون', language: 'الإنجليزية', currency: 'دولار ناميبي', gdp: '$16 مليار', timezone: 'GMT+2', government: 'جمهورية' },
+      { name: 'مالي', emoji: '🇲🇱', code: 'ML', continent: 'إفريقيا', capital: 'باماكو', area: '1.2 مليون كم²', population: '22 مليون', language: 'الفرنسية', currency: 'فرنك إفريقي', gdp: '$18 مليار', timezone: 'GMT+0', government: 'جمهورية' },
+      { name: 'بوركينا فاسو', emoji: '🇧🇫', code: 'BF', continent: 'إفريقيا', capital: 'واغادوغو', area: '274 ألف كم²', population: '22 مليون', language: 'الفرنسية', currency: 'فرنك إفريقي', gdp: '$17 مليار', timezone: 'GMT+0', government: 'جمهورية' },
+      { name: 'ساحل العاج', emoji: '🇨🇮', code: 'CI', continent: 'إفريقيا', capital: 'ياموسوكرو', area: '322 ألف كم²', population: '28 مليون', language: 'الفرنسية', currency: 'فرنك إفريقي', gdp: '$77 مليار', timezone: 'GMT+0', government: 'جمهورية' },
+      { name: 'توغو', emoji: '🇹🇬', code: 'TG', continent: 'إفريقيا', capital: 'لومي', area: '56.8 ألف كم²', population: '8.8 مليون', language: 'الفرنسية', currency: 'فرنك إفريقي', gdp: '$13 مليار', timezone: 'GMT+0', government: 'جمهورية' },
+      { name: 'بنين', emoji: '🇧🇯', code: 'BJ', continent: 'إفريقيا', capital: 'بورتو نوفو', area: '114 ألف كم²', population: '13 مليون', language: 'الفرنسية', currency: 'فرنك إفريقي', gdp: '$18 مليار', timezone: 'GMT+1', government: 'جمهورية' },
+      { name: 'ليبيريا', emoji: '🇱🇷', code: 'LR', continent: 'إفريقيا', capital: 'مونروفيا', area: '111 ألف كم²', population: '5.3 مليون', language: 'الإنجليزية', currency: 'دولار ليبيري', gdp: '$3.5 مليار', timezone: 'GMT+0', government: 'جمهورية' },
+      { name: 'سيراليون', emoji: '🇸🇱', code: 'SL', continent: 'إفريقيا', capital: 'فريتاون', area: '71.7 ألف كم²', population: '8.4 مليون', language: 'الإنجليزية', currency: 'ليون سيراليون', gdp: '$4 مليار', timezone: 'GMT+0', government: 'جمهورية' },
+      { name: 'غينيا', emoji: '🇬🇳', code: 'GN', continent: 'إفريقيا', capital: 'كوناكري', area: '246 ألف كم²', population: '14 مليون', language: 'الفرنسية', currency: 'فرنك غيني', gdp: '$17 مليار', timezone: 'GMT+0', government: 'جمهورية' },
+      { name: 'غينيا بيساو', emoji: '🇬🇼', code: 'GW', continent: 'إفريقيا', capital: 'بيساو', area: '36.1 ألف كم²', population: '2.1 مليون', language: 'البرتغالية والكريول', currency: 'فرنك إفريقي', gdp: '$1.4 مليار', timezone: 'GMT+0', government: 'جمهورية' },
+      { name: 'جمبيا', emoji: '🇬🇲', code: 'GM', continent: 'إفريقيا', capital: 'بانجول', area: '11.3 ألف كم²', population: '2.5 مليون', language: 'الإنجليزية', currency: 'دالاسي جامبي', gdp: '$2 مليار', timezone: 'GMT+0', government: 'جمهورية' },
+      { name: 'كاب فيردي', emoji: '🇨🇻', code: 'CV', continent: 'إفريقيا', capital: 'برايا', area: '4.0 ألف كم²', population: '0.6 مليون', language: 'البرتغالية والكريول', currency: 'إسكودو كاب فيردي', gdp: '$2 مليار', timezone: 'GMT-1', government: 'جمهورية' },
+      { name: 'موريتانيا', emoji: '🇲🇷', code: 'MR', continent: 'إفريقيا', capital: 'نواكشوط', area: '1.0 مليون كم²', population: '4.9 مليون', language: 'العربية والفرنسية', currency: 'أوجية موريتانية', gdp: '$8 مليار', timezone: 'GMT+0', government: 'جمهورية إسلامية' },
+
+      // دول أوروبا الإضافية
+      { name: 'بيلاروسيا', emoji: '🇧🇾', code: 'BY', continent: 'أوروبا', capital: 'مينسك', area: '207 ألف كم²', population: '9.3 مليون', language: 'البيلاروسية والروسية', currency: 'روبل بيلاروسي', gdp: '$88 مليار', timezone: 'GMT+3', government: 'جمهورية' },
+      { name: 'صربيا', emoji: '🇷🇸', code: 'RS', continent: 'أوروبا', capital: 'بيلغراد', area: '88.4 ألف كم²', population: '6.7 مليون', language: 'الصربية', currency: 'دينار صربي', gdp: '$82 مليار', timezone: 'GMT+1', government: 'جمهورية' },
+      { name: 'بلغاريا', emoji: '🇧🇬', code: 'BG', continent: 'أوروبا', capital: 'صوفيا', area: '110 ألف كم²', population: '6.9 مليون', language: 'البلغارية', currency: 'ليف بلغاري', gdp: '$115 مليار', timezone: 'GMT+2', government: 'جمهورية برلمانية' },
+      { name: 'كرواتيا', emoji: '🇭🇷', code: 'HR', continent: 'أوروبا', capital: 'زغرب', area: '56.6 ألف كم²', population: '3.9 مليون', language: 'الكرواتية', currency: 'كونا كرواتية', gdp: '$76 مليار', timezone: 'GMT+1', government: 'جمهورية برلمانية' },
+      { name: 'البوسنة والهرسك', emoji: '🇧🇦', code: 'BA', continent: 'أوروبا', capital: 'سراييفو', area: '51.1 ألف كم²', population: '3.2 مليون', language: 'البوسنية والصربية والكرواتية', currency: 'مارك بوسني', gdp: '$26 مليار', timezone: 'GMT+1', government: 'جمهورية فيدرالية' },
+      { name: 'ألبانيا', emoji: '🇦🇱', code: 'AL', continent: 'أوروبا', capital: 'تيرانا', area: '28.7 ألف كم²', population: '2.9 مليون', language: 'الألبانية', currency: 'ليك ألباني', gdp: '$19 مليار', timezone: 'GMT+1', government: 'جمهورية' },
+      { name: 'مقدونيا', emoji: '🇲🇰', code: 'MK', continent: 'أوروبا', capital: 'سكوبيا', area: '25.7 ألف كم²', population: '2.1 مليون', language: 'المقدونية', currency: 'دينار مقدوني', gdp: '$17 مليار', timezone: 'GMT+1', government: 'جمهورية' },
+      { name: 'ليتوانيا', emoji: '🇱🇹', code: 'LT', continent: 'أوروبا', capital: 'فيلنيوس', area: '65.3 ألف كم²', population: '2.8 مليون', language: 'الليتوانية', currency: 'يورو', gdp: '$70 مليار', timezone: 'GMT+2', government: 'جمهورية برلمانية' },
+      { name: 'سلوفينيا', emoji: '🇸🇮', code: 'SI', continent: 'أوروبا', capital: 'لوبليانا', area: '20.3 ألف كم²', population: '2.1 مليون', language: 'السلوفينية', currency: 'يورو', gdp: '$76 مليار', timezone: 'GMT+1', government: 'جمهورية برلمانية' },
+      { name: 'لاتفيا', emoji: '🇱🇻', code: 'LV', continent: 'أوروبا', capital: 'ريغا', area: '64.6 ألف كم²', population: '1.9 مليون', language: 'اللاتفية', currency: 'يورو', gdp: '$43 مليار', timezone: 'GMT+2', government: 'جمهورية برلمانية' },
+      { name: 'استونيا', emoji: '🇪🇪', code: 'EE', continent: 'أوروبا', capital: 'تالين', area: '45.2 ألف كم²', population: '1.3 مليون', language: 'الإستونية', currency: 'يورو', gdp: '$43 مليار', timezone: 'GMT+2', government: 'جمهورية برلمانية' },
+      { name: 'مولدوفا', emoji: '🇲🇩', code: 'MD', continent: 'أوروبا', capital: 'كيشيناو', area: '33.8 ألف كم²', population: '2.6 مليون', language: 'الرومانية', currency: 'لاي مولدوفي', gdp: '$18 مليار', timezone: 'GMT+2', government: 'جمهورية برلمانية' },
+      { name: 'سلوفاكيا', emoji: '🇸🇰', code: 'SK', continent: 'أوروبا', capital: 'براتيسلافا', area: '49 ألف كم²', population: '5.5 مليون', language: 'السلوفاكية', currency: 'يورو', gdp: '$288 مليار', timezone: 'GMT+1', government: 'جمهورية برلمانية' },
+      { name: 'لوكسمبرغ', emoji: '🇱🇺', code: 'LU', continent: 'أوروبا', capital: 'لوكسمبرغ', area: '2.6 ألف كم²', population: '0.7 مليون', language: 'اللوكسمبرغية والفرنسية والألمانية', currency: 'يورو', gdp: '$92 مليار', timezone: 'GMT+1', government: 'دوقية دستورية' },
+      { name: 'مالطا', emoji: '🇲🇹', code: 'MT', continent: 'أوروبا', capital: 'فاليتا', area: '316 كم²', population: '0.5 مليون', language: 'المالطية والإنجليزية', currency: 'يورو', gdp: '$21 مليار', timezone: 'GMT+1', government: 'جمهورية برلمانية' },
+      { name: 'أيرلندا', emoji: '🇮🇪', code: 'IE', continent: 'أوروبا', capital: 'دبلن', area: '70.3 ألف كم²', population: '5.1 مليون', language: 'الإنجليزية والأيرلندية', currency: 'يورو', gdp: '$529 مليار', timezone: 'GMT+0', government: 'جمهورية برلمانية' },
+      { name: 'قبرص', emoji: '🇨🇾', code: 'CY', continent: 'أوروبا', capital: 'نيقوسيا', area: '9.3 ألف كم²', population: '1.3 مليون', language: 'اليونانية والتركية', currency: 'يورو', gdp: '$32 مليار', timezone: 'GMT+2', government: 'جمهورية' },
+      { name: 'أيسلندا', emoji: '🇮🇸', code: 'IS', continent: 'أوروبا', capital: 'ريكيافيك', area: '103 ألف كم²', population: '0.4 مليون', language: 'الإيسلندية', currency: 'كرونة إيسلندية', gdp: '$32 مليار', timezone: 'GMT+0', government: 'جمهورية برلمانية' },
+      { name: 'أندورا', emoji: '🇦🇩', code: 'AD', continent: 'أوروبا', capital: 'أندورا لافيلا', area: '468 كم²', population: '0.08 مليون', language: 'الكاتالانية', currency: 'يورو', gdp: '$3.2 مليار', timezone: 'GMT+1', government: 'إمارة مشتركة' },
+      { name: 'موناكو', emoji: '🇲🇨', code: 'MC', continent: 'أوروبا', capital: 'موناكو', area: '2 كم²', population: '0.04 مليون', language: 'الفرنسية والموناكية', currency: 'يورو', gdp: '$7 مليار', timezone: 'GMT+1', government: 'إمارة دستورية' },
+      { name: 'ليختنشتاين', emoji: '🇱🇮', code: 'LI', continent: 'أوروبا', capital: 'فادوتس', area: '160 كم²', population: '0.04 مليون', language: 'الألمانية', currency: 'فرنك سويسري', gdp: '$6.7 مليار', timezone: 'GMT+1', government: 'إمارة دستورية' },
+      { name: 'سان مارينو', emoji: '🇸🇲', code: 'SM', continent: 'أوروبا', capital: 'سان مارينو', area: '61 كم²', population: '0.03 مليون', language: 'الإيطالية', currency: 'يورو', gdp: '$1.9 مليار', timezone: 'GMT+1', government: 'جمهورية' },
+      { name: 'الفاتيكان', emoji: '🇻🇦', code: 'VA', continent: 'أوروبا', capital: 'الفاتيكان', area: '0.44 كم²', population: '0.001 مليون', language: 'الإيطالية واللاتينية', currency: 'يورو', gdp: '$0.3 مليار', timezone: 'GMT+1', government: 'دولة دينية' },
+
+      // دول أمريكا الشمالية الإضافية
+      { name: 'بهاما', emoji: '🇧🇸', code: 'BS', continent: 'أمريكا الشمالية', capital: 'ناسو', area: '13.9 ألف كم²', population: '0.4 مليون', language: 'الإنجليزية', currency: 'دولار بهامي', gdp: '$13 مليار', timezone: 'GMT-5', government: 'ملكية برلمانية' },
+      { name: 'بربادوس', emoji: '🇧🇧', code: 'BB', continent: 'أمريكا الشمالية', capital: 'بريدجتاون', area: '430 كم²', population: '0.3 مليون', language: 'الإنجليزية', currency: 'دولار باربادوسي', gdp: '$5.2 مليار', timezone: 'GMT-4', government: 'ملكية برلمانية' },
+      { name: 'سانت كيتس ونيفس', emoji: '🇰🇳', code: 'KN', continent: 'أمريكا الشمالية', capital: 'باستير', area: '261 كم²', population: '0.05 مليون', language: 'الإنجليزية', currency: 'دولار كاريبي شرقي', gdp: '$1.3 مليار', timezone: 'GMT-4', government: 'ملكية برلمانية' },
+      { name: 'أنتيغوا وبربودا', emoji: '🇦🇬', code: 'AG', continent: 'أمريكا الشمالية', capital: 'سانت جونز', area: '443 كم²', population: '0.1 مليون', language: 'الإنجليزية', currency: 'دولار كاريبي شرقي', gdp: '$1.8 مليار', timezone: 'GMT-4', government: 'ملكية برلمانية' },
+      { name: 'سانت لوسيا', emoji: '🇱🇨', code: 'LC', continent: 'أمريكا الشمالية', capital: 'كاستريز', area: '616 كم²', population: '0.2 مليون', language: 'الإنجليزية', currency: 'دولار كاريبي شرقي', gdp: '$2.2 مليار', timezone: 'GMT-4', government: 'ملكية برلمانية' },
+      { name: 'سانت فينسينت والغرينادينيس', emoji: '🇻🇨', code: 'VC', continent: 'أمريكا الشمالية', capital: 'كينغستاون', area: '389 كم²', population: '0.1 مليون', language: 'الإنجليزية', currency: 'دولار كاريبي شرقي', gdp: '$1.1 مليار', timezone: 'GMT-4', government: 'ملكية برلمانية' },
+      { name: 'غرينادا', emoji: '🇬🇩', code: 'GD', continent: 'أمريكا الشمالية', capital: 'سانت جورجز', area: '344 كم²', population: '0.1 مليون', language: 'الإنجليزية', currency: 'دولار كاريبي شرقي', gdp: '$1.3 مليار', timezone: 'GMT-4', government: 'ملكية برلمانية' },
+      { name: 'ترينيداد وتوباغو', emoji: '🇹🇹', code: 'TT', continent: 'أمريكا الشمالية', capital: 'بورت أوف سبين', area: '5.1 ألف كم²', population: '1.4 مليون', language: 'الإنجليزية', currency: 'دولار ترينيداد وتوباغو', gdp: '$30 مليار', timezone: 'GMT-4', government: 'جمهورية برلمانية' },
+      { name: 'غيانا الفرنسية', emoji: '🇬🇫', code: 'GF', continent: 'أمريكا الجنوبية', capital: 'كايين', area: '83.8 ألف كم²', population: '0.3 مليون', language: 'الفرنسية', currency: 'يورو', gdp: '$3.5 مليار', timezone: 'GMT-3', government: 'تابعة لفرنسا' },
+      
+      // دول آسيا الإضافية المفقودة
+      { name: 'تايوان', emoji: '🇹🇼', code: 'TW', continent: 'آسيا', capital: 'تايبيه', area: '36.2 ألف كم²', population: '23.8 مليون', language: 'المندرينية', currency: 'دولار تايواني', gdp: '$1.2 تريليون', timezone: 'GMT+8', government: 'جمهورية' },
+      { name: 'هونغ كونغ', emoji: '🇭🇰', code: 'HK', continent: 'آسيا', capital: 'فيكتوريا', area: '1.1 ألف كم²', population: '7.5 مليون', language: 'الكانتونية والمندرينية', currency: 'دولار هونغ كونغ', gdp: '$366 مليار', timezone: 'GMT+8', government: 'منطقة إدارية خاصة' },
+      { name: 'ماكاو', emoji: '🇲🇴', code: 'MO', continent: 'آسيا', capital: 'ماكاو', area: '32.9 كم²', population: '0.6 مليون', language: 'الكانتونية والبرتغالية', currency: 'باتاكا ماكاو', gdp: '$46 مليار', timezone: 'GMT+8', government: 'منطقة إدارية خاصة' },
+      { name: 'بنما', emoji: '🇵🇦', code: 'PA', continent: 'أمريكا الشمالية', capital: 'بنما سيتي', area: '75.4 ألف كم²', population: '4.4 مليون', language: 'الإسبانية والإنجليزية', currency: 'بالبوا بنمي', gdp: '$81 مليار', timezone: 'GMT-5', government: 'جمهورية' },
+      
+      // دول أفريقيا الإضافية المفقودة
+      { name: 'مالاوي', emoji: '🇲🇼', code: 'MW', continent: 'إفريقيا', capital: 'ليلونغوي', area: '118 ألف كم²', population: '20 مليون', language: 'الإنجليزية والتشيتشيوا', currency: 'كواشا مالاوي', gdp: '$12 مليار', timezone: 'GMT+2', government: 'جمهورية' },
+      { name: 'ليسوتو', emoji: '🇱🇸', code: 'LS', continent: 'إفريقيا', capital: 'ماسيرو', area: '30.4 ألف كم²', population: '2.3 مليون', language: 'السيسوتو والإنجليزية', currency: 'لوتي ليسوتي', gdp: '$3.2 مليار', timezone: 'GMT+2', government: 'ملكية' },
+      { name: 'جزر القمر', emoji: '🇰🇲', code: 'KM', continent: 'إفريقيا', capital: 'موروني', area: '1.9 ألف كم²', population: '0.9 مليون', language: 'القمري والعربية والفرنسية', currency: 'فرنك قمري', gdp: '$1.2 مليار', timezone: 'GMT+3', government: 'جمهورية اتحادية' },
+      { name: 'موريشيوس', emoji: '🇲🇺', code: 'MU', continent: 'إفريقيا', capital: 'بورت لويس', area: '2.0 ألف كم²', population: '1.3 مليون', language: 'الإنجليزية والموريشيوسية', currency: 'روبية موريشيوسية', gdp: '$13 مليار', timezone: 'GMT+4', government: 'جمهورية برلمانية' },
+      { name: 'سيشل', emoji: '🇸🇨', code: 'SC', continent: 'إفريقيا', capital: 'فيكتوريا', area: '455 كم²', population: '0.1 مليون', language: 'الإنجليزية والفرنسية والسيشيلية', currency: 'روبية سيشيلية', gdp: '$1.7 مليار', timezone: 'GMT+4', government: 'جمهورية' },
+      { name: 'الرأس الأخضر', emoji: '🇨🇻', code: 'CV', continent: 'إفريقيا', capital: 'برايا', area: '4.0 ألف كم²', population: '0.6 مليون', language: 'البرتغالية والكريول', currency: 'إسكودو كاب فيردي', gdp: '$2 مليار', timezone: 'GMT-1', government: 'جمهورية' },
+      { name: 'سان توميه وبرينسيبي', emoji: '🇸🇹', code: 'ST', continent: 'إفريقيا', capital: 'سان توميه', area: '964 كم²', population: '0.2 مليون', language: 'البرتغالية', currency: 'دوبرا سان توميهي', gdp: '$0.6 مليار', timezone: 'GMT+0', government: 'جمهورية' },
+      
+      // دول أوروبا الإضافية المفقودة
+      { name: 'سيبيريا (روسيا)', emoji: '🇷🇺', code: 'RU-SIB', continent: 'آسيا/أوروبا', capital: 'نوفوسيبيرسك', area: 'جزء من روسيا', population: 'جزء من روسيا', language: 'الروسية', currency: 'روبل روسي', gdp: 'جزء من روسيا', timezone: 'GMT+6 إلى GMT+11', government: 'فيدرالية روسية' },
+      { name: 'جبل طارق', emoji: '🇬🇮', code: 'GI', continent: 'أوروبا', capital: 'مدينة جبل طارق', area: '6.8 كم²', population: '0.03 مليون', language: 'الإنجليزية والإسبانية', currency: 'جنيه جبل طارق', gdp: '$0.65 مليار', timezone: 'GMT+1', government: 'إقليم بريطاني' },
+      { name: 'غرينلاند', emoji: '🇬🇱', code: 'GL', continent: 'أمريكا الشمالية', capital: 'نوك', area: '2.1 مليون كم²', population: '0.056 مليون', language: 'الجرينلاندية', currency: 'كرونة دنماركية', gdp: '$2.7 مليار', timezone: 'GMT-3 إلى GMT-1', government: 'منطقة ذاتية الحكم دنماركية' },
+      { name: 'جزر فارو', emoji: '🇫🇴', code: 'FO', continent: 'أوروبا', capital: 'توردشافن', area: '1.4 ألف كم²', population: '0.05 مليون', language: 'الفاروسية والدنماركية', currency: 'كرونة فاروسية', gdp: '$2.6 مليار', timezone: 'GMT+0', government: 'تابعة للدنمارك' },
+      
+      // جزر كاريبية إضافية
+      { name: 'جزر كايمان', emoji: '🇰🇾', code: 'KY', continent: 'أمريكا الشمالية', capital: 'جورج تاون', area: '264 كم²', population: '0.07 مليون', language: 'الإنجليزية', currency: 'دولار جزر كايمان', gdp: '$6.3 مليار', timezone: 'GMT-5', government: 'إقليم بريطاني' },
+      { name: 'برمودا', emoji: '🇧🇲', code: 'BM', continent: 'أمريكا الشمالية', capital: 'هاملتون', area: '54 كم²', population: '0.065 مليون', language: 'الإنجليزية', currency: 'دولار برمودي', gdp: '$6.4 مليار', timezone: 'GMT-4', government: 'إقليم بريطاني' },
+      { name: 'جزر تركس وكايكوس', emoji: '🇹🇨', code: 'TC', continent: 'أمريكا الشمالية', capital: 'كوك تاون', area: '948 كم²', population: '0.04 مليون', language: 'الإنجليزية', currency: 'دولار أمريكي', gdp: '$0.96 مليار', timezone: 'GMT-4', government: 'إقليم بريطاني' },
+      { name: 'جزر فيرجن البريطانية', emoji: '🇻🇬', code: 'VG', continent: 'أمريكا الشمالية', capital: 'رود تاون', area: '153 كم²', population: '0.03 مليون', language: 'الإنجليزية', currency: 'دولار أمريكي', gdp: '$1.1 مليار', timezone: 'GMT-4', government: 'إقليم بريطاني' },
+      { name: 'جزر فيرجن الأمريكية', emoji: '🇻🇮', code: 'VI', continent: 'أمريكا الشمالية', capital: 'شارلوت أماليا', area: '347 كم²', population: '0.1 مليون', language: 'الإنجليزية', currency: 'دولار أمريكي', gdp: '$3.8 مليار', timezone: 'GMT-4', government: 'إقليم أمريكي' },
+      { name: 'أنجويلا', emoji: '🇦🇮', code: 'AI', continent: 'أمريكا الشمالية', capital: 'فالي', area: '91 كم²', population: '0.015 مليون', language: 'الإنجليزية', currency: 'دولار كاريبي شرقي', gdp: '$0.3 مليار', timezone: 'GMT-4', government: 'إقليم بريطاني' },
+      { name: 'سانت مارتن/مارتينيك', emoji: '🇲🇫', code: 'MF', continent: 'أمريكا الشمالية', capital: 'ماريغو', area: '53 كم²', population: '0.04 مليون', language: 'الفرنسية والإنجليزية', currency: 'يورو', gdp: '$1.1 مليار', timezone: 'GMT-4', government: 'جماعة فرنسية' },
+      { name: 'سانت بارتيليمي', emoji: '🇧🇱', code: 'BL', continent: 'أمريكا الشمالية', capital: 'غوستافيا', area: '21 كم²', population: '0.01 مليون', language: 'الفرنسية', currency: 'يورو', gdp: '$0.25 مليار', timezone: 'GMT-4', government: 'جماعة فرنسية' },
+      { name: 'مونتسيرات', emoji: '🇲🇸', code: 'MS', continent: 'أمريكا الشمالية', capital: 'بليموث', area: '102 كم²', population: '0.005 مليون', language: 'الإنجليزية', currency: 'دولار كاريبي شرقي', gdp: '$0.2 مليار', timezone: 'GMT-4', government: 'إقليم بريطاني' },
+      { name: 'جزر توركس وكايكوس', emoji: '🇹🇨', code: 'TC', continent: 'أمريكا الشمالية', capital: 'كوك تاون', area: '948 كم²', population: '0.04 مليون', language: 'الإنجليزية', currency: 'دولار أمريكي', gdp: '$0.96 مليار', timezone: 'GMT-4', government: 'إقليم بريطاني' },
+      
+      // دول الهادئ الإضافية
+      { name: 'بالاو', emoji: '🇵🇼', code: 'PW', continent: 'أوقيانوسيا', capital: 'نجرولمود', area: '459 كم²', population: '0.018 مليون', language: 'البالاوية والإنجليزية', currency: 'دولار أمريكي', gdp: '$0.26 مليار', timezone: 'GMT+9', government: 'جمهورية' },
+      { name: 'ميكرونيزيا', emoji: '🇫🇲', code: 'FM', continent: 'أوقيانوسيا', capital: 'باليكير', area: '702 كم²', population: '0.115 مليون', language: 'الإنجليزية', currency: 'دولار أمريكي', gdp: '$0.33 مليار', timezone: 'GMT+10 إلى GMT+12', government: 'جمهورية' },
+      { name: 'جزر مارشال', emoji: '🇲🇭', code: 'MH', continent: 'أوقيانوسيا', capital: 'ماجورو', area: '181 كم²', population: '0.042 مليون', language: 'المارشالية والإنجليزية', currency: 'دولار أمريكي', gdp: '$0.23 مليار', timezone: 'GMT+12', government: 'جمهورية' },
+      { name: 'تونغا', emoji: '🇹🇴', code: 'TO', continent: 'أوقيانوسيا', capital: 'نوكو ألوفا', area: '747 كم²', population: '0.1 مليون', language: 'التونغان والإنجليزية', currency: 'بانجا تونغان', gdp: '$0.52 مليار', timezone: 'GMT+13', government: 'ملكية' },
+      
+      // الجزر الصغيرة والأقاليم
+      { name: 'جزر كوك', emoji: '🇨🇰', code: 'CK', continent: 'أوقيانوسيا', capital: 'أفاروا', area: '236 كم²', population: '0.017 مليون', language: 'الإنجليزية والكوكية', currency: 'دولار جزر كوك', gdp: '$0.31 مليار', timezone: 'GMT-10', government: 'إقليم حر مرتبط بنيوزيلندا' },
+      { name: 'نيوي', emoji: '🇳🇺', code: 'NU', continent: 'أوقيانوسيا', capital: 'ألوفي', area: '260 كم²', population: '0.0016 مليون', language: 'الإنجليزية والنيويان', currency: 'دولار نيوزيلندي', gdp: '$0.033 مليار', timezone: 'GMT-11', government: 'إقليم حر مرتبط بنيوزيلندا' },
+      { name: 'جزر بيتكيرن', emoji: '🇵🇳', code: 'PN', continent: 'أوقيانوسيا', capital: 'آدمستاون', area: '47 كم²', population: '0.0005 مليون', language: 'الإنجليزية والبيتكيرنية', currency: 'دولار نيوزيلندي', gdp: '< 0.001 مليار', timezone: 'GMT-8', government: 'إقليم بريطاني' },
+      { name: 'والس وفوتونا', emoji: '🇼🇫', code: 'WF', continent: 'أوقيانوسيا', capital: 'ماتافاو', area: '142 كم²', population: '0.013 مليون', language: 'الفرنسية والوالسية', currency: 'فرنك بولينيزي فرنسي', gdp: '$0.2 مليار', timezone: 'GMT+12', government: 'جماعة فرنسية' },
+      { name: 'بولينيزيا الفرنسية', emoji: '🇵🇫', code: 'PF', continent: 'أوقيانوسيا', capital: 'بابيتي', area: '4.2 ألف كم²', population: '0.28 مليون', language: 'الفرنسية والتاهيتية', currency: 'فرنك بولينيزي فرنسي', gdp: '$5.2 مليار', timezone: 'GMT-10', government: 'جماعة فرنسية' },
+      { name: 'جوام', emoji: '🇬🇺', code: 'GU', continent: 'أوقيانوسيا', capital: 'هاغاتنا', area: '549 كم²', population: '0.17 مليون', language: 'الإنجليزية والتشامورو', currency: 'دولار أمريكي', gdp: '$6.3 مليار', timezone: 'GMT+10', government: 'إقليم أمريكي' },
+      { name: 'جزر مريانا الشمالية', emoji: '🇲🇵', code: 'MP', continent: 'أوقيانوسيا', capital: 'سايبان', area: '464 كم²', population: '0.057 مليون', language: 'الإنجليزية والتشامورو', currency: 'دولار أمريكي', gdp: '$1.3 مليار', timezone: 'GMT+10', government: 'إقليم أمريكي' },
+      { name: 'جزر أمريكا الصغرى', emoji: '🇺🇸', code: 'UM', continent: 'أوقيانوسيا', capital: 'ن/أ', area: '35 كم²', population: '0', language: 'الإنجليزية', currency: 'دولار أمريكي', gdp: '0', timezone: 'متنوع', government: 'إقليم أمريكي' },
+      { name: 'ساموا الأمريكية', emoji: '🇦🇸', code: 'AS', continent: 'أوقيانوسيا', capital: 'باغو باغو', area: '199 كم²', population: '0.055 مليون', language: 'الساموانية والإنجليزية', currency: 'تالا ساموانية أمريكية', gdp: '$0.7 مليار', timezone: 'GMT-11', government: 'إقليم أمريكي' },
+      { name: 'جزر سانتا هيلانة', emoji: '🇸🇭', code: 'SH', continent: 'أفريقيا (جزيرة نائية)', capital: 'جيمستاون', area: '308 كم²', population: '0.0047 مليون', language: 'الإنجليزية', currency: 'جنيه سانتا هيلانة', gdp: '$0.04 مليار', timezone: 'GMT+0', government: 'إقليم بريطاني' },
+      { name: 'جزر الرأس الأخضر', emoji: '🇨🇻', code: 'CV', continent: 'إفريقيا', capital: 'برايا', area: '4.0 ألف كم²', population: '0.6 مليون', language: 'البرتغالية والكريول', currency: 'إسكودو كاب فيردي', gdp: '$2 مليار', timezone: 'GMT-1', government: 'جمهورية' }
     ];
 
     // Chemistry Data
@@ -2457,5 +2499,5 @@
       });
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d8f10dd2643e18b',t:'MTc3Mjk0MzgyMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d8f37fd234ae27d',t:'MTc3Mjk0NTQyMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
